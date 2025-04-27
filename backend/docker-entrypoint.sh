@@ -2,7 +2,7 @@
 set -e
 
 echo "⏳ Esperando a que MySQL esté disponible en db:3306..."
-until nc -z db 3306; do
+until nc -z $DB_HOST $DB_PORT; do
   echo "🔁 Aún no está listo, esperando..."
   sleep 2
 done
