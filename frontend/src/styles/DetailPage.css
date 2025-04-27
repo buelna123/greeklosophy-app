@@ -1,0 +1,206 @@
+/* ============================
+   ESTILOS COMPARTIDOS PARA DETALLE DE ARTÍCULOS Y CURSOS
+   ============================ */
+
+/* Página principal */
+.detail-page {
+    position: relative;
+    overflow-x: hidden;
+    background: linear-gradient(45deg, #f8f8f8, #e6e6e6);
+    padding-bottom: 2rem;
+    min-height: 100vh;
+  }
+  
+  /* Barra de progreso */
+  .detail-progress-bar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    height: 5px;
+    background: #d32f2f;
+    width: 0%;
+    z-index: 1000;
+    transition: width 0.2s linear;
+  }
+  
+  /* Layout con Sidebar */
+  .detail-layout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem clamp(1rem, 5vw, 3rem);
+    max-width: 1400px;
+    margin-inline: auto;
+  }
+  
+  /* Tarjeta principal */
+  .detail-container {
+    background: #ffffff;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    width: 100%;
+    max-width: 800px;
+    min-height: 500px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(211, 47, 47, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+  
+  .detail-container:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 16px 30px rgba(211, 47, 47, 0.2);
+  }
+  
+  /* Título animado */
+  .detail-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 5rem;
+    line-height: 1.2;
+    text-align: center;
+    background: linear-gradient(180deg, #111010, #791616);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  /* Imagen + Tilt */
+  .detail-image-tilt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    perspective: 1000px;
+  }
+  
+  .detail-image {
+    width: 100%;
+    max-width: 600px;
+    max-height: 60vh;
+    border-radius: 15px;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    border: 2px solid rgba(211, 47, 47, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .detail-image:hover {
+    box-shadow: 0px 12px 30px rgba(211, 47, 47, 0.25);
+    border-color: rgba(211, 47, 47, 0.3);
+  }
+  
+  /* Contenido con typing */
+  .detail-content {
+    font-size: 1.2rem;
+    color: #444;
+    line-height: 1.8;
+    margin: 2rem 0;
+    text-align: left;
+    border-left: 4px solid #d32f2f;
+    padding: 1.5rem;
+    background-color: rgba(251, 238, 238, 0.5);
+    border-radius: 8px;
+    backdrop-filter: blur(2px);
+    min-height: 120px;
+  }
+  
+  /* Metadata (autor / fecha / categoría) */
+  .detail-meta {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .detail-category {
+    text-align: left;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #333;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Loader dentro de la tarjeta */
+  .spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    padding: 2rem;
+  }
+  
+  /* Error */
+  .detail-error {
+    font-size: 1.3rem;
+    color: #d32f2f;
+    font-weight: bold;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .detail-button {
+    display: inline-block;
+    padding: clamp(0.8rem, 2.5vw, 1rem) clamp(1.8rem, 5vw, 2.5rem);
+    font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(45deg, #d32f2f, #b71c1c);
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .detail-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+  }
+  
+  .detail-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 20px rgba(211, 47, 47, 0.4);
+  }
+  
+  .detail-button:hover::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  
+  .detail-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.4);
+  }
+  
+  /* Responsive */
+  @media (max-width: 992px) {
+    .detail-layout {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .detail-container {
+      max-width: 90%;
+      min-height: 500px;
+    }
+  
+    .detail-image {
+      border-radius: 12px;
+    }
+  
+    .detail-content {
+      padding: 1rem;
+      border-left-width: 3px;
+    }
+  }
+  

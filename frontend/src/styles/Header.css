@@ -1,0 +1,176 @@
+/* Navbar y branding */
+.custom-navbar {
+  background-color: white !important;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 5px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Asegúrate de que sea menor que el z-index de la barra de progreso */
+  transition: all 0.3s ease;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+.brand:hover {
+  transform: scale(1.05);
+  color: #d91313;
+}
+
+.logo {
+  height: 60px;
+  margin-right: 10px;
+}
+
+/* Enlaces de navegación */
+.nav-link {
+  color: black !important;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #d91313;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #d91313 !important;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Search Bar y Loading */
+.search-bar-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 220px;
+  padding: 10px 15px;
+  border: 2px solid black;
+  border-radius: 20px;
+  font-size: 1rem;
+  background-color: white;
+  color: black;
+  outline: none;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 10px rgba(211, 47, 47, 0.5);
+  outline: none;
+}
+
+/* Indicador de carga dentro del search bar */
+.search-loading {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Resultados de búsqueda */
+.search-results {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.search-results li {
+  padding: 10px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.search-results li:hover,
+.search-results li.selected {
+  background: #f0f0f0;
+  color: black;
+}
+
+/* Iconos de navegación */
+.icon-link {
+  font-size: 1.2rem;
+  margin-left: 15px;
+  color: black !important;
+  transition: transform 0.2s ease-in-out;
+}
+
+.icon-link:hover {
+  transform: scale(1.2);
+  color: #d91313 !important;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .search-input {
+    width: 180px;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+  
+  .search-results li {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+  
+  .custom-navbar {
+    padding: 5px 10px;
+  }
+  
+  .brand {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input {
+    width: 150px;
+    font-size: 0.85rem;
+  }
+  
+  .brand {
+    font-size: 1.1rem;
+  }
+}

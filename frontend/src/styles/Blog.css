@@ -1,0 +1,206 @@
+/* Contenedor principal de la página del blog */
+.blog-page-container {
+    padding: 3rem 0rem;
+    text-align: center;
+    background: #f9f9f9;
+  }
+  
+  /* Título estilizado */
+  .blog-page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 0.8s ease-out forwards;
+  }
+  
+  .blog-page-title::after {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 3px;
+    background: #d32f2f;
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+  }
+  
+  /* Contenedor del título centrado */
+  .blog-header-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  /* Buscador centrado */
+  .blog-search-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .blog-search-input {
+    max-width: 600px;
+    width: 100%;
+    border: 2px solid #d32f2f;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+  }
+  
+  /* Lista de artículos */
+  .blog-article-list {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  /* Elemento individual */
+  .blog-article-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .blog-article-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Imagen del artículo */
+  .blog-article-image {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 1.5rem;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .blog-article-item:hover .blog-article-image {
+    transform: scale(1.05);
+  }
+  
+  /* Contenido */
+  .blog-article-content {
+    flex: 1;
+    text-align: left;
+  }
+  
+  /* Título */
+  .blog-article-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Autor y fecha */
+  .blog-article-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Resumen */
+  .blog-article-excerpt {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Botón "Leer más" */
+  .blog-article-button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    background: transparent;
+    border: 2px solid #d32f2f;
+    color: #d32f2f;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .blog-article-button:hover {
+    background: #d32f2f;
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  /* Animaciones */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .blog-article-item {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem;
+    }
+  
+    .blog-article-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+  
+    .blog-article-button {
+      position: relative;
+      margin-top: 10px;
+      bottom: auto;
+      right: auto;
+      display: block;
+      text-align: center;
+    }
+  
+    .blog-header-wrapper,
+    .blog-search-wrapper {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .blog-search-input {
+      width: 90%;
+    }
+  }
+  

@@ -1,0 +1,161 @@
+/* Contenedor principal del sidebar */
+.sidebar-articulos {
+  padding: 1.5rem 1rem;
+  background-color: transparent;
+  max-width: 300px;
+  margin-left: auto;
+  position: relative;
+}
+
+/* Estilo general para cada tarjeta */
+.sidebar-articulos .card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fff;
+}
+
+.sidebar-articulos .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.1);
+}
+
+/* Tarjeta unificada para sidebar mientras carga */
+.sidebar-single-card {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Altura uniforme para spinner */
+.sidebar-loading-height {
+  height: 400px; /* Mantiene el tamaño similar a la tarjeta real */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Sección individual dentro del sidebar */
+.sidebar-section {
+  margin-bottom: 2rem;
+}
+
+/* Título de cada sección */
+.sidebar-articulos .card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #d32f2f;
+  border-bottom: 1px solid rgba(211, 47, 47, 0.2);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Lista de enlaces */
+.sidebar-articulos ul {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.sidebar-articulos ul li {
+  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.sidebar-articulos ul li a {
+  position: relative;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar-articulos ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: #d32f2f;
+  transition: width 0.3s ease;
+}
+
+.sidebar-articulos ul li a:hover {
+  color: #d32f2f;
+}
+
+.sidebar-articulos ul li a:hover::after {
+  width: 100%;
+}
+
+/* Badge para categorías */
+.sidebar-articulos .badge {
+  background-color: #fce8e8;
+  color: #b71c1c;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  margin-right: 0.4rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-articulos .badge:hover {
+  background-color: #f8d1d1;
+  cursor: pointer;
+}
+
+/* Filtro activo */
+.sidebar-articulos .active-filter {
+  background-color: #d32f2f !important;
+  color: #fff !important;
+  font-weight: bold;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
+.sidebar-articulos .active-filter:hover {
+  background-color: #b71c1c !important;
+}
+
+/* Spinner mientras carga */
+.sidebar-loading-card {
+  height: 180px; /* Mantiene la altura fija */
+  width: 100%;
+  background-color: #f8f9fa;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Estilo específico para centrar spinner */
+.sidebar-loading-height {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .sidebar-articulos {
+    max-width: 100%;
+    padding: 1rem 0;
+    margin: 0;
+  }
+
+  .sidebar-articulos .card {
+    margin-bottom: 1.2rem;
+  }
+
+  .sidebar-articulos .badge {
+    margin-bottom: 0.4rem;
+  }
+}

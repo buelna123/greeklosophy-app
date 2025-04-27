@@ -1,0 +1,202 @@
+/* modalprofile.css actualizado */
+
+/* Animación entrada modal */
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal.show .modal-dialog {
+  animation: slideInUp 0.4s ease-out;
+}
+
+/* Estilo general del modal */
+.modal-content {
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+/* Cabecera */
+.modal-header {
+  background-color: #f9f9f9;
+  border-bottom: 2px solid #d32f2f;
+  padding: 1.5rem;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Cuerpo */
+.modal-body {
+  padding: 2rem;
+}
+
+.modal-body p {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+}
+
+/* Botones */
+.btn-primary {
+  background: #d32f2f;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 100%;
+  transition: yellow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #b71c1c;
+  transform: scale(1.05);
+}
+
+/* Formulario */
+.form-group {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  padding: 0.8rem;
+  transition: border 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #d32f2f;
+  box-shadow: 0 0 5px rgba(211, 47, 47, 0.5);
+}
+
+/* 🔥 Custom tabs con animaciones */
+.modal-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2.5rem;
+}
+
+.modal-tab {
+  flex: 1;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: #d32f2f;
+  border-bottom: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.modal-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0%;
+  height: 3px;
+  background: #d32f2f;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.modal-tab:hover::after {
+  width: 80%;
+}
+
+.modal-tab.active {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.modal-tab.active::after {
+  background: #d32f2f;
+  width: 100%;
+}
+
+/* Transición entre secciones login/register */
+.modal-form-section {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  display: none;
+}
+
+.modal-form-section.active {
+  opacity: 1;
+  transform: translateY(0);
+  display: block;
+}
+
+.btn-primary:disabled {
+  background-color: #d32f2f !important;
+  border-color: #d32f2f !important;
+}
+
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:focus:active {
+  background-color: #d32f2f !important;
+  border-color: #d32f2f !important;
+  box-shadow: none !important;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .modal-body {
+    padding: 1.2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .btn-primary {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .modal-tabs {
+    flex-direction: column;
+    border-bottom: none;
+  }
+
+  .modal-tab {
+    border-bottom: none;
+    border-left: 5px solid transparent;
+    text-align: left;
+  }
+
+  .modal-tab.active {
+    background-color: #d32f2f;
+    border-left: 5px solid #b71c1c;
+    color: white;
+  }
+}

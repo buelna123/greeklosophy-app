@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "target": "ESNext",            // Asegura que el código se compile para ESNext
+    "module": "ESNext",            // Permite usar import.meta
+    "moduleResolution": "node",    // Resuelve los módulos de manera compatible con Node.js
+    "jsx": "react-jsx",            // Soporta JSX con React
+    "strict": true,                // Habilita las comprobaciones estrictas en TypeScript
+    "esModuleInterop": true,       // Asegura que la importación de módulos comunes sea compatible
+    "skipLibCheck": true,          // Omite la verificación de archivos de declaración de bibliotecas
+    "forceConsistentCasingInFileNames": true // Asegura que las rutas de los archivos respeten las mayúsculas y minúsculas
+  }
+}

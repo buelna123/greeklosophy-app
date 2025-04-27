@@ -1,0 +1,105 @@
+/* Contenedor principal de la sección */
+.homepage-courses {
+    background: #f9f9f9;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    margin-bottom: -4rem;
+}
+
+/* Título estilizado */
+.homepage-courses-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.homepage-courses-title::after {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 3px;
+    background: #d32f2f;
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
+/* Contenedor de los cursos destacados en fila */
+.homepage-courses-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+}
+
+/* Tarjetas alineadas */
+.homepage-course-card {
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ANIMACIÓN: Hover en las tarjetas (zoom y sombra) */
+.course-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.course-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Línea divisoria entre imagen y contenido */
+.course-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #d32f2f;
+}
+
+/* Alinear el contenido de la tarjeta */
+.course-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 🔥 Distribuye el contenido uniformemente */
+    height: 100%;
+    padding: 1rem;
+    flex-grow: 1; /* 🔥 Hace que el contenido ocupe todo el espacio disponible */
+}
+
+/* Descripción con altura mínima uniforme */
+.course-description {
+    flex-grow: 1; /* 🔥 Permite que las tarjetas crezcan a la misma altura */
+    min-height: 80px; /* 🔥 Ajusta este valor según la cantidad de texto esperada */
+    display: flex;
+    align-items: center; /* 🔥 Centra el texto dentro del espacio asignado */
+}
+
+/* Asegurar que los botones estén alineados */
+.course-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #d32f2f;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    align-self: center;
+    margin-top: auto; /* 🔥 Empuja el botón hacia abajo si es necesario */
+}
+
+/* ANIMACIÓN: Hover en el botón */
+.course-button:hover {
+    background: #b71c1c;
+    transform: scale(1.1);
+}
