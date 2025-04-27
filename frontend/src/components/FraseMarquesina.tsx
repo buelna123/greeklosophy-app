@@ -9,7 +9,7 @@ import {
   frasesDashboard,
   frasesAdmin,
 } from "@/utils/frases";
-import "@/styles/fraseMarquesina.css";
+import "@/styles/FraseMarquesina.css";
 
 const getFrasesPorRuta = (pathname: string): string[] => {
   if (pathname.startsWith("/courses")) return frasesCursos;
