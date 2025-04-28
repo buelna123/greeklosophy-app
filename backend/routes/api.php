@@ -114,3 +114,59 @@ Route::prefix('admin')->group(function () {
     Route::get('/assignment-reviews', [AssignmentReviewController::class, 'index']);
     Route::post('/submissions/{submission}/feedback', [AssignmentReviewController::class, 'feedback']);
 });
+
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+
+Route::get('/manual-seed-courses', function () {
+    DB::table('courses')->insert([
+        [
+            'title' => 'Platón y la Teoría de las Ideas',
+            'description' => 'Explora la filosofía de Platón y su influencia en el pensamiento occidental.',
+            'image' => 'platon.jpg',
+            'category' => 'Filosofía',
+            'tags' => 'Reflexión, Pensamiento',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+        [
+            'title' => 'Aristóteles: Ética y Lógica',
+            'description' => 'Un recorrido por la ética, metafísica y lógica aristotélica.',
+            'image' => 'aristoteles.jpg',
+            'category' => 'Ética',
+            'tags' => 'Moral, Valores',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+        [
+            'title' => 'Los Presocráticos',
+            'description' => 'Descubre a los primeros filósofos y sus teorías sobre el cosmos.',
+            'image' => 'presocraticos.jpg',
+            'category' => 'Historia',
+            'tags' => 'Antigüedad, Tradición',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+        [
+            'title' => 'La Sofística y Sócrates',
+            'description' => 'Analiza la diferencia entre los sofistas y la ética socrática.',
+            'image' => 'socrates.jpg',
+            'category' => 'Filosofía',
+            'tags' => 'Reflexión, Pensamiento',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+        [
+            'title' => 'El Estoicismo y el Epicureísmo',
+            'description' => 'Dos formas de vida filosófica en la Grecia helenística.',
+            'image' => 'estoicismo_epicureismo.jpg',
+            'category' => 'Filosofía',
+            'tags' => 'Reflexión, Pensamiento',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+    ]);
+
+    return response()->json(['message' => 'Cursos insertados correctamente']);
+});
