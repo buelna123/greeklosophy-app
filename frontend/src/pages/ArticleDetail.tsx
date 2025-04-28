@@ -122,7 +122,7 @@ const ArticleDetail = () => {
                 >
                   <img
                     className="detail-image"
-                    src={`http://localhost:8001/storage/${article.image}`}
+                    src={`${import.meta.env.VITE_BACKEND_URL}/storage/${article.image}`}
                     alt={article.title}
                     loading="lazy"
                   />

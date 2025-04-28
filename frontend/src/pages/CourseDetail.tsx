@@ -157,7 +157,7 @@ const CourseDetail = () => {
                 >
                   <img
                     className="detail-image"
-                    src={`http://localhost:8001/storage/${course.image}`}
+                    src={`${import.meta.env.VITE_BACKEND_URL}/storage/${course.image}`}
                     alt={course.title}
                     loading="lazy"
                   />

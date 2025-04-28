@@ -18,7 +18,7 @@ const CourseCard: React.FC<CourseProps> = ({ course }) => {
     >
       <div className="course-img-container">
         <img
-          src={`http://localhost:8001/storage/${course.image}`}  // Se mantiene la ruta para obtener la imagen desde storage
+          src={`${import.meta.env.VITE_BACKEND_URL}/storage/${course.image}`}
           className="course-img"
           alt={course.title}
         />
