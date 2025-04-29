@@ -131,12 +131,11 @@ const Blog = () => {
               <ListGroup className="blog-article-list">
                 {filteredArticles.map((article) => (
                   <ListGroup.Item key={article.id} className="blog-article-item">
-                    <Image
-                      src={`http://localhost:8001/storage/${article.image}`}
-                      alt={article.title}
-                      className="blog-article-image"
-                      rounded
-                    />
+                      <img
+                        src={article.image ? article.image : "https://via.placeholder.com/300x200?text=Sin+Imagen"}
+                        className="blog-article-image"
+                        alt={article.title}
+                      />
                     <div className="blog-article-content">
                       <h3 className="blog-article-title">{article.title}</h3>
                       <p className="blog-article-meta">

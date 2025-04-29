@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "../styles/testimonials.css";
 
+import img1 from "@/assets/testimonial1.jpg";
+import img2 from "@/assets/testimonial2.jpg";
+import img3 from "@/assets/testimonial3.jpg";
+
 interface Testimonial {
   id: number;
   name: string;
@@ -13,25 +17,24 @@ export function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
-    // Simulación de datos (puedes sustituir esto con una llamada fetch en el futuro)
     setTestimonials([
       {
         id: 1,
         name: "María González",
         text: "Esta plataforma cambió mi forma de ver la historia.",
-        image: "/src/assets/testimonial2.jpg",
+        image: img2,
       },
       {
         id: 2,
         name: "Carlos Pérez",
         text: "Cursos bien estructurados y muy interesantes.",
-        image: "/src/assets/testimonial1.jpg",
+        image: img1,
       },
       {
         id: 3,
         name: "Ana López",
         text: "Recomiendo esta plataforma a todos los amantes de la historia.",
-        image: "/src/assets/testimonial3.jpg",
+        image: img3,
       },
     ]);
   }, []);
