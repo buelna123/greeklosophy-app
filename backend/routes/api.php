@@ -116,32 +116,3 @@ Route::prefix('admin')->group(function () {
     Route::get('/assignment-reviews', [AssignmentReviewController::class, 'index']);
     Route::post('/submissions/{submission}/feedback', [AssignmentReviewController::class, 'feedback']);
 });
-
-Route::get('/manual-seed-users', function () {
-    // ⚡ Desactivar temporalmente restricciones de claves foráneas
-    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-    DB::table('users')->truncate();
-    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-    // Insertar los usuarios
-    DB::table('users')->insert([
-        [
-            'name' => 'Admin User',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('admin1234'), // ✅ usamos bcrypt directamente
-            'role' => 'admin',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ],
-        [
-            'name' => 'Student User',
-            'email' => 'student@student.com',
-            'password' => bcrypt('student1234'),
-            'role' => 'student',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ],
-    ]);
-
-    return response()->json(['message' => 'Usuarios insertados correctamente']);
-});

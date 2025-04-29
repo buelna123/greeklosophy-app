@@ -19,10 +19,10 @@ const CourseCard: React.FC<CourseProps> = ({ course }) => {
       
       <div className="course-img-container">
         <img
-            src={course.image || "https://via.placeholder.com/300x200?text=Sin+Imagen"}
-            className="course-img"
-            alt={course.title}
-          />
+          src={course.image ? course.image : "https://via.placeholder.com/300x200?text=Sin+Imagen"}
+          className="course-img"
+          alt={course.title}
+        />
       </div>
 
       <div className="course-body">

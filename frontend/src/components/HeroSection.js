@@ -1,0 +1,12 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useState } from 'react';
+import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import '../styles/HeroSection.css';
+export function HeroSection() {
+    const [index, setIndex] = useState(0);
+    const handleSelect = (selectedIndex) => {
+        setIndex(selectedIndex);
+    };
+    return (_jsxs(Carousel, { activeIndex: index, onSelect: handleSelect, className: "hero-carousel", interval: 5000, pause: "hover", fade: true, children: [_jsxs(Carousel.Item, { children: [_jsx("div", { className: "carousel-image courses", children: _jsx("div", { className: "overlay" }) }), _jsx(Carousel.Caption, { className: "caption-left", children: _jsxs("div", { className: "caption-content", children: [_jsx("h2", { children: "Sum\u00E9rgete en el aprendizaje" }), _jsx("p", { children: "Explora una variedad de cursos dise\u00F1ados por expertos para ayudarte a comprender la historia de una manera profunda y significativa." }), _jsx("blockquote", { children: "\"Nada es permanente, excepto el cambio.\" - Her\u00E1clito" }), _jsx(Link, { to: "/courses", className: "hero-button", children: "Ver Cursos" })] }) })] }), _jsxs(Carousel.Item, { children: [_jsx("div", { className: "carousel-image articles", children: _jsx("div", { className: "overlay" }) }), _jsx(Carousel.Caption, { className: "caption-right", children: _jsxs("div", { className: "caption-content", children: [_jsx("h2", { children: "Conoce nuevas perspectivas" }), _jsx("p", { children: "Accede a art\u00EDculos exclusivos que exploran diferentes \u00E9pocas, culturas y personajes hist\u00F3ricos con un enfoque anal\u00EDtico." }), _jsx("blockquote", { children: "\"El conocimiento es poder.\" - S\u00F3crates" }), _jsx(Link, { to: "/blog", className: "hero-button", children: "Leer Art\u00EDculos" })] }) })] }), _jsxs(Carousel.Item, { children: [_jsx("div", { className: "carousel-image contact", children: _jsx("div", { className: "overlay" }) }), _jsx(Carousel.Caption, { className: "caption-center", children: _jsxs("div", { className: "caption-content", children: [_jsx("h2", { children: "\u00DAnete a nuestra comunidad" }), _jsx("p", { children: "\u00BFTienes preguntas o sugerencias? Estamos aqu\u00ED para escucharte y ayudarte en tu viaje de aprendizaje." }), _jsx("blockquote", { children: "\"La educaci\u00F3n es el mejor provisionamiento para la vejez.\" - Arist\u00F3teles" }), _jsx(Link, { to: "/contacto", className: "hero-button", children: "Cont\u00E1ctanos" })] }) })] })] }));
+}

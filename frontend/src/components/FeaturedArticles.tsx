@@ -97,13 +97,15 @@ const FeaturedArticles = () => {
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
                 <div className="hover-wrapper">
+                  
                   <div className="image-container">
                     <img
-                      src={articles[currentIndex]?.image} 
+                      src={articles[currentIndex]?.image || "https://via.placeholder.com/300x200?text=Sin+Imagen"}
                       alt={articles[currentIndex]?.title}
                       className="article-image"
                     />
                   </div>
+
                   <div className="article-content">
                     <h3>{articles[currentIndex]?.title}</h3>
                     <p>

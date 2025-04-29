@@ -1,0 +1,6 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { FaBookOpen, FaChalkboardTeacher, FaUsers } from "react-icons/fa";
+import "@/styles/CallToAction.css";
+export function CallToAction() {
+    return (_jsx("section", { className: "call-to-action", children: _jsxs("div", { className: "cta-container", children: [_jsx("h2", { className: "cta-title", children: "\u00BFListo para explorar la historia como nunca antes?" }), _jsx("p", { className: "cta-subtitle", children: "\u00DAnete a miles de estudiantes apasionados por el conocimiento y accede a cursos, art\u00EDculos y m\u00E1s." }), _jsxs("div", { className: "cta-benefits", children: [_jsxs("div", { className: "cta-benefit", children: [_jsx(FaBookOpen, { className: "cta-icon" }), _jsx("p", { children: "+50 cursos sobre historia y cultura" })] }), _jsxs("div", { className: "cta-benefit", children: [_jsx(FaChalkboardTeacher, { className: "cta-icon" }), _jsx("p", { children: "Expertos en historia como instructores" })] }), _jsxs("div", { className: "cta-benefit", children: [_jsx(FaUsers, { className: "cta-icon" }), _jsx("p", { children: "Comunidad activa de aprendizaje" })] })] }), _jsx("a", { href: "/registro", className: "cta-button", children: "\u00A1Empieza ahora!" })] }) }));
+}

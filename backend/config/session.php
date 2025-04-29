@@ -17,7 +17,7 @@ return [
         Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
     ),
     'path' => '/',
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain' => env('SESSION_DOMAIN', '.vercel.app'),
     'secure' => false, // Cambiar a true si usas HTTPS
     'http_only' => true,
     'same_site' => 'lax',
