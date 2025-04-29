@@ -12,12 +12,11 @@ return [
     'table' => 'sessions',
     'store' => null,
     'lottery' => [2, 100],
-    'cookie' => Str::slug(env('APP_NAME', 'laravel'), '_').'_session',
+    'cookie' => env('SESSION_COOKIE', 'greeklosophy_session'),
     'path' => '/',
     'domain' => env('SESSION_DOMAIN', null),
-    'secure' => env('SESSION_SECURE_COOKIE', true),
+    'secure' => env('SESSION_SECURE_COOKIE', true), // ya bien
     'http_only' => true,
-    'same_site' => 'lax',
+    'same_site' => 'none', // <<< Aquí cambiamos 'lax' por 'none'
     'partitioned' => false,
-    'cookie' => env('SESSION_COOKIE', 'greeklosophy_session'),
 ];
