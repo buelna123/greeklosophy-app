@@ -120,12 +120,12 @@ const ArticleDetail = () => {
                   glarePosition="all"
                   className="detail-image-tilt"
                 >
-                  <img
-                    className="detail-image"
-                    src={`${import.meta.env.VITE_BACKEND_URL}/storage/${article.image}`}
-                    alt={article.title}
-                    loading="lazy"
-                  />
+                <img
+                  src={article.image ? article.image : "https://via.placeholder.com/300x200?text=Sin+Imagen"}
+                  className="detail-image"
+                  alt={article.title}
+                  loading="lazy"
+                />
                 </Tilt>
                 <p className="detail-content" ref={contentRef}></p>
                 {article.category && (

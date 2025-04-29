@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TopicRequest;
 use App\Models\Topic;
+use App\Models\QuizQuestion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AdminTopicController extends Controller
 {
@@ -48,16 +51,33 @@ class AdminTopicController extends Controller
     public function store(TopicRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $topic = Topic::create($validated);
 
-        Cache::forget("admin_topics_page_1");
-        Cache::forget("admin_topics_course_{$validated['course_id']}_page_1");
-        Cache::forget("topics_course_{$validated['course_id']}");
+        try {
+            $topic = DB::transaction(function () use ($validated) {
+                $topic = Topic::create($validated);
 
-        return response()->json([
-            'success' => 'Topic creado exitosamente.',
-            'topic'   => $topic,
-        ], 201);
+                // Crear una pregunta dummy automáticamente
+                QuizQuestion::create([
+                    'topic_id' => $topic->id,
+                    'question_text' => 'Placeholder: edita esta pregunta',
+                    'points' => 1,
+                ]);
+
+                return $topic;
+            });
+
+            Cache::forget("admin_topics_page_1");
+            Cache::forget("admin_topics_course_{$validated['course_id']}_page_1");
+            Cache::forget("topics_course_{$validated['course_id']}");
+
+            return response()->json([
+                'success' => 'Topic y quiz creados exitosamente.',
+                'topic'   => $topic,
+            ], 201);
+        } catch (\Exception $e) {
+            Log::error("Error al crear topic desde admin: " . $e->getMessage());
+            return response()->json(['error' => 'Error al crear el topic.'], 500);
+        }
     }
 
     public function update(TopicRequest $request, int $id): JsonResponse
