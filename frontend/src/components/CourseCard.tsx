@@ -16,15 +16,13 @@ const CourseCard: React.FC<CourseProps> = ({ course }) => {
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.2 }}
     >
-      
       <div className="course-img-container">
         <img
-          src={course.image ? course.image : "https://via.placeholder.com/300x200?text=Sin+Imagen"}
+          src={`http://localhost:8001/storage/${course.image}`}  // Se mantiene la ruta para obtener la imagen desde storage
           className="course-img"
           alt={course.title}
         />
       </div>
-
       <div className="course-body">
         <h3 className="course-title">{course.title}</h3>
         <p className="course-description">{course.description}</p>
