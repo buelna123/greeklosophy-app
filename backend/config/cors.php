@@ -1,14 +1,12 @@
 <?php
 
 return [
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie'], // aunque no uses sanctum
     'allowed_methods' => ['*'],
-        'allowed_origins' => [
-            'https://greeklosophy-app-good.vercel.app',
-            'https://greeklosophy.vercel.app',
-            'https://www.greeklosophy.com',
-            'https://greeklosophy.com',
-        ],
+    'allowed_origins' => [
+        env('FRONTEND_URL', 'http://localhost:5173'),
+        'https://greeklosophy-app-good.vercel.app',
+    ],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
     'max_age' => 0,
