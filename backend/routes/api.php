@@ -117,140 +117,31 @@ Route::prefix('admin')->group(function () {
     Route::post('/submissions/{submission}/feedback', [AssignmentReviewController::class, 'feedback']);
 });
 
-// 🚀 Tus manual seeds:
-Route::get('/manual-seed-courses', function () {
-    DB::table('courses')->insert([
-        [
-            'title' => 'Platón y la Teoría de las Ideas',
-            'description' => 'Explora la filosofía de Platón y su influencia en el pensamiento occidental.',
-            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => 'Filosofía',
-            'tags' => 'Reflexión, Pensamiento',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-        [
-            'title' => 'Aristóteles: Ética y Lógica',
-            'description' => 'Un recorrido por la ética, metafísica y lógica aristotélica.',
-            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => 'Ética',
-            'tags' => 'Moral, Valores',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-        [
-            'title' => 'Los Presocráticos',
-            'description' => 'Descubre a los primeros filósofos y sus teorías sobre el cosmos.',
-            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => 'Historia',
-            'tags' => 'Antigüedad, Tradición',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-        [
-            'title' => 'La Sofística y Sócrates',
-            'description' => 'Analiza la diferencia entre los sofistas y la ética socrática.',
-            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => 'Filosofía',
-            'tags' => 'Reflexión, Pensamiento',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-        [
-            'title' => 'El Estoicismo y el Epicureísmo',
-            'description' => 'Dos formas de vida filosófica en la Grecia helenística.',
-            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => 'Filosofía',
-            'tags' => 'Reflexión, Pensamiento',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-    ]);
-
-    return response()->json(['message' => 'Cursos insertados correctamente']);
-});
-
-Route::get('/manual-seed-articles', function () {
-    // Deshabilitar restricciones de claves foráneas temporalmente
+Route::get('/manual-seed-users', function () {
+    // ⚡ Desactivar temporalmente restricciones de claves foráneas
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-    DB::table('articles')->truncate();
+    DB::table('users')->truncate();
     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-    // Definimos arrays de categorías y tags disponibles
-    $categories = ['Filosofía', 'Ética', 'Metafísica', 'Lógica'];
-    $tagsList = [
-        'Filosofía'   => 'Mito, Reflexión',
-        'Ética'       => 'Moral, Valores',
-        'Metafísica'  => 'Ser, Existencia',
-        'Lógica'      => 'Razonamiento, Argumento'
-    ];
-
-    DB::table('articles')->insert([
+    // Insertar los usuarios
+    DB::table('users')->insert([
         [
-            'title'    => 'La Alegoría de la Caverna',
-            'content'  => 'Analizamos el mito de la caverna de Platón y su significado en la actualidad.',
-            'author'   => 'Platón',
-            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => $categories[0],
-            'tags'     => $tagsList[$categories[0]],
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'name' => 'Admin User',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin1234'), // ✅ usamos bcrypt directamente
+            'role' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
-            'title'    => 'El concepto de eudaimonía',
-            'content'  => 'Exploramos cómo Aristóteles definía la felicidad y el propósito de la vida.',
-            'author'   => 'Aristóteles',
-            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => $categories[1],
-            'tags'     => $tagsList[$categories[1]],
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-        [
-            'title'    => 'Parménides vs. Heráclito: El Ser y el Cambio',
-            'content'  => 'Una discusión sobre las ideas de estos dos pensadores presocráticos.',
-            'author'   => 'Heráclito',
-            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => $categories[2],
-            'tags'     => $tagsList[$categories[2]],
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-        [
-            'title'    => 'Sócrates y la Ética',
-            'content'  => 'Cómo la mayéutica socrática transformó la filosofía moral.',
-            'author'   => 'Sócrates',
-            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => $categories[1],
-            'tags'     => $tagsList[$categories[1]],
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-        [
-            'title'    => 'El Estoicismo en la Vida Moderna',
-            'content'  => 'Cómo aplicar el pensamiento estoico en el mundo actual.',
-            'author'   => 'Epicteto',
-            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => $categories[0],
-            'tags'     => $tagsList[$categories[0]],
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ],
-        [
-            'title'    => 'Introducción a la lógica formal',
-            'content'  => 'Bases y conceptos fundamentales para entender el razonamiento lógico.',
-            'author'   => 'Aristóteles',
-            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
-            'category' => $categories[3],
-            'tags'     => $tagsList[$categories[3]],
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'name' => 'Student User',
+            'email' => 'student@student.com',
+            'password' => bcrypt('student1234'),
+            'role' => 'student',
+            'created_at' => now(),
+            'updated_at' => now(),
         ],
     ]);
 
-    return response()->json([
-        'message' => 'Artículos insertados correctamente',
-        'count' => 6,
-        'categories' => $categories
-    ]);
+    return response()->json(['message' => 'Usuarios insertados correctamente']);
 });
