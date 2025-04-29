@@ -20,6 +20,8 @@ use App\Http\Controllers\AdminExamController;
 use App\Http\Controllers\AssignmentReviewController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\EnrolledMiddleware;
+use Illuminate\Support\Facades\DB; // ✅ Solo una vez
+use Illuminate\Support\Carbon;     // ✅ Solo una vez
 
 // Rutas públicas
 Route::get('/courses', [CourseController::class, 'index']);
@@ -53,8 +55,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::put('/topic-quizzes/{topic}', [QuizController::class, 'update']);
 Route::put('/course-exams/{course}', [ExamController::class, 'update']);
 Route::get('/course-exams/{course}', [ExamController::class, 'show']);
-Route::get('/course-exams/{course}/results', [ExamController::class, 'results']); // ✅ Resultados por curso
-Route::get('/course-exams/results', [ExamController::class, 'resultsAll']); // ✅ Resultados globales
+Route::get('/course-exams/{course}/results', [ExamController::class, 'results']);
+Route::get('/course-exams/results', [ExamController::class, 'resultsAll']);
 
 // Rutas accesibles por administradores
 Route::middleware([
@@ -115,10 +117,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/submissions/{submission}/feedback', [AssignmentReviewController::class, 'feedback']);
 });
 
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
-
+// 🚀 Tus manual seeds:
 Route::get('/manual-seed-courses', function () {
     DB::table('courses')->insert([
         [
@@ -170,9 +169,6 @@ Route::get('/manual-seed-courses', function () {
 
     return response()->json(['message' => 'Cursos insertados correctamente']);
 });
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
 
 Route::get('/manual-seed-articles', function () {
     // Deshabilitar restricciones de claves foráneas temporalmente
