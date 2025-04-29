@@ -119,6 +119,61 @@ Route::prefix('admin')->group(function () {
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
+Route::get('/manual-seed-courses', function () {
+    DB::table('courses')->insert([
+        [
+            'title' => 'Platón y la Teoría de las Ideas',
+            'description' => 'Explora la filosofía de Platón y su influencia en el pensamiento occidental.',
+            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
+            'category' => 'Filosofía',
+            'tags' => 'Reflexión, Pensamiento',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+        [
+            'title' => 'Aristóteles: Ética y Lógica',
+            'description' => 'Un recorrido por la ética, metafísica y lógica aristotélica.',
+            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
+            'category' => 'Ética',
+            'tags' => 'Moral, Valores',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+        [
+            'title' => 'Los Presocráticos',
+            'description' => 'Descubre a los primeros filósofos y sus teorías sobre el cosmos.',
+            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
+            'category' => 'Historia',
+            'tags' => 'Antigüedad, Tradición',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+        [
+            'title' => 'La Sofística y Sócrates',
+            'description' => 'Analiza la diferencia entre los sofistas y la ética socrática.',
+            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
+            'category' => 'Filosofía',
+            'tags' => 'Reflexión, Pensamiento',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+        [
+            'title' => 'El Estoicismo y el Epicureísmo',
+            'description' => 'Dos formas de vida filosófica en la Grecia helenística.',
+            'image' => 'https://i.imgur.com/ORWNbII.jpeg',
+            'category' => 'Filosofía',
+            'tags' => 'Reflexión, Pensamiento',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ],
+    ]);
+
+    return response()->json(['message' => 'Cursos insertados correctamente']);
+});
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+
 Route::get('/manual-seed-articles', function () {
     // Deshabilitar restricciones de claves foráneas temporalmente
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -139,7 +194,7 @@ Route::get('/manual-seed-articles', function () {
             'title'    => 'La Alegoría de la Caverna',
             'content'  => 'Analizamos el mito de la caverna de Platón y su significado en la actualidad.',
             'author'   => 'Platón',
-            'image'    => 'default.jpg',
+            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
             'category' => $categories[0],
             'tags'     => $tagsList[$categories[0]],
             'created_at' => Carbon::now(),
@@ -149,7 +204,7 @@ Route::get('/manual-seed-articles', function () {
             'title'    => 'El concepto de eudaimonía',
             'content'  => 'Exploramos cómo Aristóteles definía la felicidad y el propósito de la vida.',
             'author'   => 'Aristóteles',
-            'image'    => 'default.jpg',
+            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
             'category' => $categories[1],
             'tags'     => $tagsList[$categories[1]],
             'created_at' => Carbon::now(),
@@ -159,7 +214,7 @@ Route::get('/manual-seed-articles', function () {
             'title'    => 'Parménides vs. Heráclito: El Ser y el Cambio',
             'content'  => 'Una discusión sobre las ideas de estos dos pensadores presocráticos.',
             'author'   => 'Heráclito',
-            'image'    => 'default.jpg',
+            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
             'category' => $categories[2],
             'tags'     => $tagsList[$categories[2]],
             'created_at' => Carbon::now(),
@@ -169,7 +224,7 @@ Route::get('/manual-seed-articles', function () {
             'title'    => 'Sócrates y la Ética',
             'content'  => 'Cómo la mayéutica socrática transformó la filosofía moral.',
             'author'   => 'Sócrates',
-            'image'    => 'default.jpg',
+            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
             'category' => $categories[1],
             'tags'     => $tagsList[$categories[1]],
             'created_at' => Carbon::now(),
@@ -179,7 +234,7 @@ Route::get('/manual-seed-articles', function () {
             'title'    => 'El Estoicismo en la Vida Moderna',
             'content'  => 'Cómo aplicar el pensamiento estoico en el mundo actual.',
             'author'   => 'Epicteto',
-            'image'    => 'default.jpg',
+            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
             'category' => $categories[0],
             'tags'     => $tagsList[$categories[0]],
             'created_at' => Carbon::now(),
@@ -189,7 +244,7 @@ Route::get('/manual-seed-articles', function () {
             'title'    => 'Introducción a la lógica formal',
             'content'  => 'Bases y conceptos fundamentales para entender el razonamiento lógico.',
             'author'   => 'Aristóteles',
-            'image'    => 'default.jpg',
+            'image'    => 'https://i.imgur.com/ORWNbII.jpeg',
             'category' => $categories[3],
             'tags'     => $tagsList[$categories[3]],
             'created_at' => Carbon::now(),

@@ -6,12 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import api from "@/api";
 import "@/styles/FeaturedArticles.css";
 
-// Definición de la interfaz Article (ajústala o impórtala desde tu archivo de tipos globales)
+// Definición de la interfaz Article
 export interface Article {
   id: number;
   title: string;
   content: string;
-  image: string;
+  image: string; 
   author: string;
   date: string;
   category: string;
@@ -26,7 +26,6 @@ interface PaginatedResponse<T> {
 }
 
 const FeaturedArticles = () => {
-  // Utilizamos React Query para obtener todos los artículos
   const { data: articlesData, isLoading, isError, error } = useQuery<Article[]>({
     queryKey: ["featuredArticles"],
     queryFn: async () => {
@@ -38,15 +37,12 @@ const FeaturedArticles = () => {
     refetchOnWindowFocus: false,
   });
 
-  // Extraemos los primeros 4 artículos (puedes ordenarlos aquí si lo necesitas)
   const articles = articlesData ? articlesData.slice(0, 4) : [];
 
-  // Estado interno para el slide actual y la variable que controla el primer render para la animación
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [maxContentLength, setMaxContentLength] = React.useState(150);
   const [firstLoad, setFirstLoad] = React.useState(true);
 
-  // Efecto para actualizar el límite de contenido en función del ancho de la ventana
   React.useEffect(() => {
     const handleResize = () => {
       setMaxContentLength(window.innerWidth < 768 ? 100 : 150);
@@ -56,7 +52,6 @@ const FeaturedArticles = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Pequeño efecto para dejar de mostrar la animación de primer render después de 400ms
   React.useEffect(() => {
     const timer = setTimeout(() => setFirstLoad(false), 400);
     return () => clearTimeout(timer);
@@ -104,32 +99,26 @@ const FeaturedArticles = () => {
                 <div className="hover-wrapper">
                   <div className="image-container">
                     <img
-                      src={`http://localhost:8001/storage/${articles[currentIndex].image}`}
-                      alt={articles[currentIndex].title}
+                      src={articles[currentIndex]?.image} 
+                      alt={articles[currentIndex]?.title}
                       className="article-image"
                     />
                   </div>
                   <div className="article-content">
-                    <h3>{articles[currentIndex].title}</h3>
+                    <h3>{articles[currentIndex]?.title}</h3>
                     <p>
-                      {articles[currentIndex].content.substring(0, maxContentLength)}...
+                      {articles[currentIndex]?.content.substring(0, maxContentLength)}...
                     </p>
                     <div className="article-meta">
-                      <span className="author">
-                        Por {articles[currentIndex].author}
-                      </span>
+                      <span className="author">Por {articles[currentIndex]?.author}</span>
                       <span className="date">
                         {formatDate(
-                          articles[currentIndex].updated_at ||
-                            articles[currentIndex].created_at
+                          articles[currentIndex]?.updated_at || articles[currentIndex]?.created_at
                         )}
                       </span>
                     </div>
                     <div className="button-container">
-                      <Link
-                        to={`/articles/${articles[currentIndex].id}`}
-                        className="read-more"
-                      >
+                      <Link to={`/articles/${articles[currentIndex]?.id}`} className="read-more">
                         Leer más
                       </Link>
                     </div>

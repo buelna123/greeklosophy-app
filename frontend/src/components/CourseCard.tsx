@@ -16,13 +16,15 @@ const CourseCard: React.FC<CourseProps> = ({ course }) => {
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.2 }}
     >
+      
       <div className="course-img-container">
         <img
-          src={`${import.meta.env.VITE_BACKEND_URL}/storage/${course.image}`}
-          className="course-img"
-          alt={course.title}
-        />
+            src={course.image || "https://via.placeholder.com/300x200?text=Sin+Imagen"}
+            className="course-img"
+            alt={course.title}
+          />
       </div>
+
       <div className="course-body">
         <h3 className="course-title">{course.title}</h3>
         <p className="course-description">{course.description}</p>
