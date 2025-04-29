@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\HandleCors; // <== Agregar esto al inicio
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -18,9 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->group('api', [
+            HandleCors::class, // <== Agregar aquí nuestro propio HandleCors personalizado
             'cookies',
             'startSession',
-            'throttle:60,1', // ← límite de 60 requests por minuto SIN necesidad de registrar "api"
+            'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
     })
