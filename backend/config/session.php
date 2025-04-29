@@ -18,7 +18,7 @@ return [
     ),
     'path' => '/',
     'domain' => env('SESSION_DOMAIN', '.vercel.app'),
-    'secure' => false, // Cambiar a true si usas HTTPS
+    'secure' => true,
     'http_only' => true,
     'same_site' => 'lax',
     'partitioned' => false,

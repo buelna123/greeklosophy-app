@@ -116,3 +116,16 @@ Route::prefix('admin')->group(function () {
     Route::get('/assignment-reviews', [AssignmentReviewController::class, 'index']);
     Route::post('/submissions/{submission}/feedback', [AssignmentReviewController::class, 'feedback']);
 });
+
+
+Route::get('/clear-config', function () {
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+    return 'Config cache cleared';
+});
+
+
+Route::get('/generate-session-table', function () {
+    \Illuminate\Support\Facades\Artisan::call('session:table');
+    \Illuminate\Support\Facades\Artisan::call('migrate');
+    return 'Tabla de sesión creada';
+});
