@@ -20,8 +20,10 @@ use App\Http\Controllers\AdminExamController;
 use App\Http\Controllers\AssignmentReviewController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\EnrolledMiddleware;
-use Illuminate\Support\Facades\DB; // ✅ Solo una vez
-use Illuminate\Support\Carbon;     // ✅ Solo una vez
+use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Carbon;  
+use App\Models\Course;
+use App\Models\Exam;
 
 // Rutas públicas
 Route::get('/courses', [CourseController::class, 'index']);
@@ -126,115 +128,27 @@ Route::get('/clear-config', function () {
     return 'Todo limpiadoss';
 });
 
+Route::get('/fix-missing-exams', function () {
+    $courses = Course::with('exam')->get();
+    $created = [];
 
-// ⚠️ Inyección temporal de datos en varias tablas para testing
-Route::get('/manual-seed-extra', function () {
-    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    foreach ($courses as $course) {
+        if (!$course->exam) {
+            $exam = $course->exam()->create([
+                'title' => 'Examen de ' . $course->title,
+                'description' => 'Examen generado automáticamente para este curso.',
+            ]);
+            $created[] = [
+                'course_id' => $course->id,
+                'exam_id' => $exam->id,
+                'title' => $exam->title,
+            ];
+        }
+    }
 
-    // 1. assignment
-    DB::table('assignments')->truncate();
-    DB::table('assignments')->insert([
-        'course_id'   => 1,
-        'title'       => 'Tarea de ejemplo',
-        'description' => 'Esta es una tarea inicial para pruebas.',
-        'due_date'    => now()->addDays(5),
-        'created_at'  => now(),
-        'updated_at'  => now(),
+    return response()->json([
+        'message' => 'Exámenes creados para cursos sin examen.',
+        'total_created' => count($created),
+        'created' => $created,
     ]);
-
-    // 2. badges
-    DB::table('badges')->truncate();
-    DB::table('badges')->insert([
-        'name' => 'Ejemplo',
-        'description' => 'Medalla de prueba',
-        'criteria' => 'Test',
-        'icon' => 'badge_test.png',
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // 3. exam
-    DB::table('exams')->truncate();
-    DB::table('exams')->insert([
-        'course_id' => 1,
-        'title' => 'Examen de prueba',
-        'description' => 'Evaluación inicial',
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // 4. exam_questions
-    DB::table('exam_questions')->truncate();
-    DB::table('exam_questions')->insert([
-        'exam_id' => 1,
-        'question_text' => '¿Pregunta demo?',
-        'points' => 2,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // 5. exam_options
-    DB::table('exam_options')->truncate();
-    DB::table('exam_options')->insert([
-        'question_id' => 1,
-        'option_text' => 'Respuesta correcta',
-        'is_correct' => true,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // 6. quiz_questions
-    DB::table('quiz_questions')->truncate();
-    DB::table('quiz_questions')->insert([
-        'topic_id' => 1,
-        'question_text' => '¿Pregunta quiz demo?',
-        'points' => 1,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // 7. quiz_options
-    DB::table('quiz_options')->truncate();
-    DB::table('quiz_options')->insert([
-        'question_id' => 1,
-        'option_text' => 'Opción demo',
-        'is_correct' => true,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // 8. topic
-    DB::table('topics')->truncate();
-    DB::table('topics')->insert([
-        'course_id' => 1,
-        'title' => 'Tema de prueba',
-        'content' => 'Este es un tema introductorio.',
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // 9. user_course_progress
-    DB::table('user_course_progress')->truncate();
-    DB::table('user_course_progress')->insert([
-        'user_id' => 1,
-        'course_id' => 1,
-        'progress' => 0.3,
-        'final_grade' => 80,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    // 10. user_badges
-    DB::table('user_badges')->truncate();
-    DB::table('user_badges')->insert([
-        'user_id' => 1,
-        'badge_id' => 1,
-        'awarded_at' => now(),
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
-
-    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-    return response()->json(['message' => 'Datos de prueba insertados en múltiples tablas.']);
 });
