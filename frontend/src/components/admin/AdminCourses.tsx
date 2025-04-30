@@ -1,4 +1,3 @@
-// src/components/admin/AdminCourses.tsx
 import React, { useState, useEffect } from "react";
 import {
   Container,
@@ -13,7 +12,7 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import { useNavigate } from "react-router-dom"; // ✅ NUEVO
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -53,7 +52,7 @@ interface APIResponse {
 
 const AdminCourses = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate(); // ✅ NUEVO
+  const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [editingCourse, setEditingCourse] = useState<Course | null>(null);
@@ -111,10 +110,14 @@ const AdminCourses = () => {
       if (formData.courseId) {
         const id = formData.courseId;
         delete formData.courseId;
-        const response = await api.post<APIResponse>(`/courses/${id}`, formData);
+        const response = await api.post<APIResponse>(`/courses/${id}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        });
         return response.data;
       } else {
-        const response = await api.post<APIResponse>(`/courses`, formData);
+        const response = await api.post<APIResponse>(`/courses`, formData, {
+          headers: { "Content-Type": "multipart/form-data" }
+        });
         return response.data;
       }
     },
@@ -242,9 +245,7 @@ const AdminCourses = () => {
                       variant="outline-secondary"
                       className="admin-button"
                       onClick={() =>
-                        navigate(
-                          `/admin/quizzes?course=${course.id}&title=${encodeURIComponent(course.title)}`
-                        )
+                        navigate(`/admin/quizzes?course=${course.id}&title=${encodeURIComponent(course.title)}`)
                       }
                     >
                       Ver Quizzes

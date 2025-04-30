@@ -1,5 +1,4 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-// src/components/admin/AdminCourses.tsx
 import { useState, useEffect } from "react";
 import { Container, Table, Button, Modal, Form, Spinner } from "react-bootstrap";
 import { useForm, Controller } from "react-hook-form";
@@ -7,7 +6,7 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import { useNavigate } from "react-router-dom"; // ✅ NUEVO
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
@@ -17,7 +16,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 registerPlugin(FilePondPluginImagePreview);
 const AdminCourses = () => {
     const queryClient = useQueryClient();
-    const navigate = useNavigate(); // ✅ NUEVO
+    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [editingCourse, setEditingCourse] = useState(null);
     const [file, setFile] = useState(null);
@@ -62,11 +61,15 @@ const AdminCourses = () => {
         if (formData.courseId) {
             const id = formData.courseId;
             delete formData.courseId;
-            const response = await api.post(`/courses/${id}`, formData);
+            const response = await api.post(`/courses/${id}`, formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+            });
             return response.data;
         }
         else {
-            const response = await api.post(`/courses`, formData);
+            const response = await api.post(`/courses`, formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+            });
             return response.data;
         }
     }, {

@@ -128,27 +128,3 @@ Route::get('/clear-config', function () {
     return 'Todo limpiadoss';
 });
 
-Route::get('/fix-missing-exams', function () {
-    $courses = Course::with('exam')->get();
-    $created = [];
-
-    foreach ($courses as $course) {
-        if (!$course->exam) {
-            $exam = $course->exam()->create([
-                'title' => 'Examen de ' . $course->title,
-                'description' => 'Examen generado automáticamente para este curso.',
-            ]);
-            $created[] = [
-                'course_id' => $course->id,
-                'exam_id' => $exam->id,
-                'title' => $exam->title,
-            ];
-        }
-    }
-
-    return response()->json([
-        'message' => 'Exámenes creados para cursos sin examen.',
-        'total_created' => count($created),
-        'created' => $created,
-    ]);
-});
