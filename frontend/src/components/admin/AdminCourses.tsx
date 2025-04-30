@@ -63,7 +63,6 @@ const AdminCourses = () => {
     register,
     handleSubmit,
     reset,
-    setValue,
     control,
     formState: { errors },
   } = useForm<FormValues>({
@@ -99,8 +98,8 @@ const AdminCourses = () => {
   useEffect(() => {
     if (coursesData) {
       const uniqueCategories = Array.from(new Set(coursesData.map(course => course.category)))
-        .filter((cat) => !!cat)
-        .map((cat) => ({ value: cat, label: cat }));
+        .filter(Boolean)
+        .map(cat => ({ value: cat, label: cat }));
       setCategories(uniqueCategories);
     }
   }, [coursesData]);
@@ -142,6 +141,7 @@ const AdminCourses = () => {
       toast.error("La imagen es obligatoria.");
       return;
     }
+
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
@@ -205,6 +205,7 @@ const AdminCourses = () => {
       <Button variant="primary" className="admin-button-primary mb-3" onClick={() => handleShowModal()}>
         Crear Nuevo Curso
       </Button>
+
       {isLoading ? (
         <div className="text-center my-4">
           <Spinner animation="border" role="status">
@@ -225,34 +226,27 @@ const AdminCourses = () => {
             </tr>
           </thead>
           <tbody>
-            {coursesData &&
-              coursesData.map((course) => (
-                <tr key={course.id}>
-                  <td>{course.id}</td>
-                  <td>{course.title}</td>
-                  <td>{course.description}</td>
-                  <td>{course.category || "Sin categoría"}</td>
-                  <td>{course.created_at ? formatDate(course.created_at) : "N/A"}</td>
-                  <td>{course.updated_at ? formatDate(course.updated_at) : "N/A"}</td>
-                  <td>
-                    <Button className="admin-button me-2" onClick={() => handleShowModal(course)}>
-                      Editar
-                    </Button>
-                    <Button variant="danger" className="admin-button me-2" onClick={() => handleDelete(course.id)}>
-                      Eliminar
-                    </Button>
-                    <Button
-                      variant="outline-secondary"
-                      className="admin-button"
-                      onClick={() =>
-                        navigate(`/admin/quizzes?course=${course.id}&title=${encodeURIComponent(course.title)}`)
-                      }
-                    >
-                      Ver Quizzes
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+            {coursesData?.map((course) => (
+              <tr key={course.id}>
+                <td>{course.id}</td>
+                <td>{course.title}</td>
+                <td>{course.description}</td>
+                <td>{course.category || "Sin categoría"}</td>
+                <td>{course.created_at ? formatDate(course.created_at) : "N/A"}</td>
+                <td>{course.updated_at ? formatDate(course.updated_at) : "N/A"}</td>
+                <td>
+                  <Button className="admin-button me-2" onClick={() => handleShowModal(course)}>Editar</Button>
+                  <Button variant="danger" className="admin-button me-2" onClick={() => handleDelete(course.id)}>Eliminar</Button>
+                  <Button
+                    variant="outline-secondary"
+                    className="admin-button"
+                    onClick={() => navigate(`/admin/quizzes?course=${course.id}&title=${encodeURIComponent(course.title)}`)}
+                  >
+                    Ver Quizzes
+                  </Button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       )}
@@ -270,11 +264,7 @@ const AdminCourses = () => {
                 {...register("title", { required: "El título es obligatorio" })}
                 isInvalid={!!errors.title}
               />
-              {errors.title && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.title.message}
-                </Form.Control.Feedback>
-              )}
+              <Form.Control.Feedback type="invalid">{errors.title?.message}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formCourseDescription" className="mb-3">
@@ -285,11 +275,7 @@ const AdminCourses = () => {
                 {...register("description", { required: "La descripción es obligatoria" })}
                 isInvalid={!!errors.description}
               />
-              {errors.description && (
-                <Form.Control.Feedback type="invalid">
-                  {errors.description.message}
-                </Form.Control.Feedback>
-              )}
+              <Form.Control.Feedback type="invalid">{errors.description?.message}</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group controlId="formCourseCategory" className="mb-3">
@@ -313,8 +299,19 @@ const AdminCourses = () => {
               />
             </Form.Group>
 
+            {editingCourse?.image && (
+              <div className="mb-3">
+                <strong>Imagen actual:</strong>
+                <img
+                  src={editingCourse.image}
+                  alt="Previsualización actual"
+                  style={{ maxWidth: "100%", height: "auto", marginTop: "0.5rem" }}
+                />
+              </div>
+            )}
+
             <Form.Group controlId="formCourseImage" className="mb-3">
-              <Form.Label>Imagen</Form.Label>
+              <Form.Label>Imagen (nueva)</Form.Label>
               <FilePond
                 files={file ? [file] : []}
                 onupdatefiles={handleFileChange}

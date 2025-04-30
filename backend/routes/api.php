@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\File;
+use App\Models\Course;
+use App\Models\Exam;
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CourseController;
@@ -20,10 +28,18 @@ use App\Http\Controllers\AdminExamController;
 use App\Http\Controllers\AssignmentReviewController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\EnrolledMiddleware;
-use Illuminate\Support\Facades\DB; 
-use Illuminate\Support\Carbon;  
-use App\Models\Course;
-use App\Models\Exam;
+
+// ✅ Ruta para servir imágenes directamente desde storage/app/public
+Route::get('/public/{folder}/{filename}', function ($folder, $filename) {
+    $path = storage_path("app/public/$folder/$filename");
+
+    if (!File::exists($path)) {
+        return response()->json(['error' => 'Archivo no encontrado.'], 404);
+    }
+
+    $mimeType = File::mimeType($path);
+    return Response::make(File::get($path), 200)->header("Content-Type", $mimeType);
+});
 
 // Rutas públicas
 Route::get('/courses', [CourseController::class, 'index']);
@@ -119,21 +135,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/submissions/{submission}/feedback', [AssignmentReviewController::class, 'feedback']);
 });
 
-
 Route::get('/clear-config', function () {
     \Illuminate\Support\Facades\Artisan::call('config:clear');
     \Illuminate\Support\Facades\Artisan::call('route:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     \Illuminate\Support\Facades\Artisan::call('view:clear');
-    return 'Todo limpiadoss';
+    return 'Todo limpiado';
 });
-
-Route::get('/storage-link', function () {
-    try {
-        \Illuminate\Support\Facades\Artisan::call('storage:link');
-        return 'Enlace simbólico creado correctamente.';
-    } catch (\Exception $e) {
-        return response()->json(['error' => $e->getMessage()], 500);
-    }
-});
-
