@@ -128,3 +128,12 @@ Route::get('/clear-config', function () {
     return 'Todo limpiadoss';
 });
 
+Route::get('/storage-link', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        return 'Enlace simbólico creado correctamente.';
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+});
+
