@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -41,17 +42,14 @@ class ArticleController extends Controller
             'title'    => 'required|string|max:255',
             'content'  => 'required|string',
             'author'   => 'required|string|max:255',
-            // Usamos created_at por defecto; no se envía manualmente
             'category' => 'required|string|max:255',
             'image'    => 'required|image',
             'tags'     => 'nullable|string',
         ]);
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            // Se almacena en el disco "public" en la carpeta "articles"
-            $filePath = $file->store('articles', 'public');
-            $validated['image'] = $filePath;
+            $path = $request->file('image')->store('articles', 'public');
+            $validated['image'] = '/api/public/articles/' . basename($path);
         }
 
         $article = Article::create($validated);
@@ -81,9 +79,8 @@ class ArticleController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filePath = $file->store('articles', 'public');
-            $validated['image'] = $filePath;
+            $path = $request->file('image')->store('articles', 'public');
+            $validated['image'] = '/api/public/articles/' . basename($path);
         } else {
             unset($validated['image']);
         }
