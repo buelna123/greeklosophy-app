@@ -4,5 +4,18 @@
       "source": "/api/:path*",
       "destination": "https://greeklosophy-app-production.up.railway.app/api/:path*"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "greeklosophy-app-good.vercel.app"
+        }
+      ],
+      "statusCode": 200
+    }
   ]
 }
