@@ -114,7 +114,6 @@ const AdminAssignments: React.FC = () => {
               <th>Curso</th>
               <th>Título</th>
               <th>Fecha Límite</th>
-              <th>Estado</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -125,7 +124,6 @@ const AdminAssignments: React.FC = () => {
                 <td>{assignment.course_name || assignment.course_id}</td>
                 <td>{assignment.title}</td>
                 <td>{formatDate(assignment.due_date)}</td>
-                <td className="text-center">{renderStatusIcon(assignment.status)}</td>
                 <td>
                   <Button className="admin-button me-2" onClick={() => handleShowModal(assignment)}>
                     Editar

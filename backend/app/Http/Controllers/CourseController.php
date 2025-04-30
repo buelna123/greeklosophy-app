@@ -112,3 +112,4 @@ class CourseController extends Controller
         return response()->json(['success' => 'Curso eliminado exitosamente.']);
     }
 }
+#
