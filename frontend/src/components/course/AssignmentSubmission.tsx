@@ -37,6 +37,10 @@ interface SubmissionResponse {
   submission: Submission;
 }
 
+const allowedExtensions = [
+  "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "zip", "rar"
+];
+
 const AssignmentSubmission: React.FC = () => {
   const { id: courseId, assignment: assignmentId } = useParams<{
     id: string;
@@ -109,18 +113,36 @@ const AssignmentSubmission: React.FC = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFile(e.target.files[0]);
+      const selected = e.target.files[0];
+      const ext = selected.name.split(".").pop()?.toLowerCase();
+
+      if (ext && allowedExtensions.includes(ext)) {
+        setFile(selected);
+        setErrorMsg("");
+      } else {
+        setErrorMsg("Tipo de archivo no permitido. Solo se aceptan: pdf, docx, txt, zip, etc.");
+        setFile(null);
+      }
     }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (!file) {
-      setErrorMsg("Debe seleccionar un archivo.");
+      setErrorMsg("Debe seleccionar un archivo válido.");
       return;
     }
+
+    const ext = file.name.split(".").pop()?.toLowerCase();
+    if (!ext || !allowedExtensions.includes(ext)) {
+      setErrorMsg("Tipo de archivo no permitido. Solo se aceptan: pdf, docx, txt, zip, etc.");
+      return;
+    }
+
     setErrorMsg("");
     setSuccessMsg("");
+
     const formData = new FormData();
     formData.append("file", file);
     mutation.mutate(formData);
@@ -194,6 +216,7 @@ const AssignmentSubmission: React.FC = () => {
                       type="file"
                       onChange={handleFileChange}
                       className="form-control"
+                      accept={allowedExtensions.map(ext => "." + ext).join(",")}
                     />
                   </Form.Group>
                   <div className="d-grid">

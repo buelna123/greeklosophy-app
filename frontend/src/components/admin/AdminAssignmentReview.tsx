@@ -37,8 +37,8 @@ const AdminAssignmentReview: React.FC = () => {
     },
     refetchOnMount: true,
     refetchOnReconnect: true,
-    refetchInterval: 30000, // auto-refresh
-    staleTime: 1000 * 60,
+    refetchInterval: 30000,
+    staleTime: 60 * 1000,
   });
 
   const mutation = useMutation<APIResponse, Error, { submissionId: number; grade: number; review_comment: string }>(
@@ -89,11 +89,6 @@ const AdminAssignmentReview: React.FC = () => {
       hour: "2-digit",
       minute: "2-digit",
     });
-  };
-
-  const getFileUrl = (path: string) => {
-    const cleanPath = path.replace(/^\/?storage\//, "");
-    return `${api.defaults.baseURL?.replace("/api", "")}/storage/${cleanPath}`;
   };
 
   return (
@@ -152,7 +147,7 @@ const AdminAssignmentReview: React.FC = () => {
               <Form.Label>Archivo Entregado</Form.Label>
               <div>
                 {current?.file_path ? (
-                  <a href={getFileUrl(current.file_path)} target="_blank" rel="noopener noreferrer">
+                  <a href={current.file_path} target="_blank" rel="noopener noreferrer">
                     Ver archivo
                   </a>
                 ) : (
