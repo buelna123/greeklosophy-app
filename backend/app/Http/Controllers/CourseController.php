@@ -6,6 +6,7 @@ use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -44,14 +45,12 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filePath = $file->store('courses', 'public');
-            $validated['image'] = $filePath;
+            $path = $request->file('image')->store('courses', 'public');
+            $validated['image'] = Storage::url($path);
         }
 
         $course = Course::create($validated);
 
-        // Crear examen automáticamente por curso
         $course->exam()->create([
             'title'       => 'Examen de ' . $course->title,
             'description' => 'Este es el examen oficial del curso.',
@@ -81,9 +80,8 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filePath = $file->store('courses', 'public');
-            $validated['image'] = $filePath;
+            $path = $request->file('image')->store('courses', 'public');
+            $validated['image'] = Storage::url($path);
         } else {
             unset($validated['image']);
         }
