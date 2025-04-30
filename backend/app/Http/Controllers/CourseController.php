@@ -46,7 +46,7 @@ class CourseController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('courses', 'public');
-            $validated['image'] = Storage::url($path);
+            $validated['image'] = '/api/public/courses/' . basename($path);
         }
 
         $course = Course::create($validated);
@@ -81,7 +81,7 @@ class CourseController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('courses', 'public');
-            $validated['image'] = Storage::url($path);
+            $validated['image'] = '/api/public/courses/' . basename($path);
         } else {
             unset($validated['image']);
         }
