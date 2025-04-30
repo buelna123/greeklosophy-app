@@ -45,10 +45,14 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
-                'folder' => 'greeklosophy/courses'
-            ]);
-            $validated['image'] = $uploaded->getSecurePath();
+            try {
+                $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+                    'folder' => 'greeklosophy/courses'
+                ]);
+                $validated['image'] = $uploaded->getSecurePath();
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Error al subir imagen: ' . $e->getMessage()], 500);
+            }
         }
 
         $course = Course::create($validated);
@@ -70,7 +74,7 @@ class CourseController extends Controller
     {
         $course = Course::find($id);
         if (!$course) {
-            return response()->json(['error' => 'Curso no encontrado.'], 404);
+            return response()->json(['error' => 'Curso sin encontrar.'], 404);
         }
 
         $validated = $request->validate([
@@ -82,12 +86,14 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
-                'folder' => 'greeklosophy/courses'
-            ]);
-            $validated['image'] = $uploaded->getSecurePath();
-        } else {
-            unset($validated['image']);
+            try {
+                $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+                    'folder' => 'greeklosophy/courses'
+                ]);
+                $validated['image'] = $uploaded->getSecurePath();
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Error al subir imagen: ' . $e->getMessage()], 500);
+            }
         }
 
         $course->update($validated);
