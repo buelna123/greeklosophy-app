@@ -29,11 +29,10 @@ php artisan view:clear
 echo "⚙️ Ejecutando migraciones..."
 php artisan migrate --force
 
-# Ejecutar seeders si RUN_SEED está en true
-if [ "$RUN_SEED" = "true" ]; then
-  echo "🌱 Ejecutando seeders..."
-  php artisan db:seed --force
-fi
+# if [ "$RUN_SEED" = "true" ]; then
+#   echo "🌱 Ejecutando seeders..."
+#   php artisan db:seed --force
+# fi
 
 echo "🚀 Iniciando Apache..."
 exec apache2-foreground
