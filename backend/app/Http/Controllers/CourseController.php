@@ -6,7 +6,7 @@ use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class CourseController extends Controller
 {
@@ -45,8 +45,10 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('courses', 'public');
-            $validated['image'] = '/api/public/courses/' . basename($path);
+            $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'greeklosophy/courses'
+            ]);
+            $validated['image'] = $uploaded->getSecurePath();
         }
 
         $course = Course::create($validated);
@@ -80,8 +82,10 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('courses', 'public');
-            $validated['image'] = '/api/public/courses/' . basename($path);
+            $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'greeklosophy/courses'
+            ]);
+            $validated['image'] = $uploaded->getSecurePath();
         } else {
             unset($validated['image']);
         }
@@ -112,4 +116,3 @@ class CourseController extends Controller
         return response()->json(['success' => 'Curso eliminado exitosamente.']);
     }
 }
-#
