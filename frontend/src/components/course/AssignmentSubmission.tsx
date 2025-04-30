@@ -19,20 +19,22 @@ interface SubmissionStatusResponse {
   submitted: boolean;
 }
 
+interface Submission {
+  id: number;
+  assignment_id: number;
+  user_id: number;
+  file_path: string;
+  grade: number | null;
+  review_comment: string | null;
+  submitted_at: string;
+  graded_at?: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 interface SubmissionResponse {
   message: string;
-  submission: {
-    id: number;
-    assignment_id: number;
-    user_id: number;
-    file_path: string;
-    grade: number | null;
-    review_comment: string | null;
-    submitted_at: string;
-    graded_at?: string | null;
-    created_at: string;
-    updated_at: string;
-  };
+  submission: Submission;
 }
 
 const AssignmentSubmission: React.FC = () => {
@@ -50,6 +52,7 @@ const AssignmentSubmission: React.FC = () => {
   const [editMode, setEditMode] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [lastSubmission, setLastSubmission] = useState<Submission | null>(null);
 
   const assignment = assignments.find((a) => a.id.toString() === assignmentId);
 
@@ -88,11 +91,12 @@ const AssignmentSubmission: React.FC = () => {
         setFile(null);
         setSubmitted(true);
         setEditMode(false);
+        setLastSubmission(data.submission);
         formRef.current?.reset();
 
         queryClient.invalidateQueries(["assignmentSubmissionStatus", courseId, assignmentId]);
         queryClient.invalidateQueries(["courseExperienceData", courseId]);
-        queryClient.invalidateQueries(["assignmentReviewList"]); // ✅ Refrescar sección admin
+        queryClient.invalidateQueries(["assignmentReviewList"]);
       },
       onError: (error: any) => {
         const errMsg = error.response?.data?.error || "Error al enviar la tarea.";
@@ -159,8 +163,20 @@ const AssignmentSubmission: React.FC = () => {
             <Card.Body>
               {submitted && !editMode ? (
                 <div>
-                  <Alert variant="success" className="d-flex align-items-center gap-2">
-                    <FaCheckCircle /> La tarea ya fue entregada.
+                  <Alert variant="success" className="d-flex flex-column gap-2">
+                    <div className="d-flex align-items-center gap-2">
+                      <FaCheckCircle /> La tarea ya fue entregada.
+                    </div>
+                    {lastSubmission?.file_path && (
+                      <a
+                        href={lastSubmission.file_path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 btn btn-outline-secondary"
+                      >
+                        Ver archivo entregado
+                      </a>
+                    )}
                   </Alert>
                   <Button variant="outline-primary" onClick={handleEdit}>
                     Editar Tarea
