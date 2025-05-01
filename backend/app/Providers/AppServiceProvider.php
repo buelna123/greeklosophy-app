@@ -15,11 +15,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        \Artisan::call('config:clear');
-        \Artisan::call('route:clear');
-        \Artisan::call('view:clear');
-        \Artisan::call('cache:clear');
-        \Artisan::call('clear-compiled');
         if (app()->environment('production')) {
             URL::forceScheme('https');
         }
