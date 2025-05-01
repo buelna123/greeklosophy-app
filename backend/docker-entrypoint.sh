@@ -34,5 +34,7 @@ php artisan migrate --force
 #   php artisan db:seed --force
 # fi
 
+php artisan queue:work --tries=1 &
+
 echo "🚀 Iniciando Apache..."
 exec apache2-foreground
