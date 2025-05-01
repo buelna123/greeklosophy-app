@@ -9,32 +9,26 @@ done
 
 echo "✅ MySQL está disponible. Continuando..."
 
-# Instalar dependencias con Composer solo si no existe el directorio vendor
 if [ ! -d "vendor" ]; then
   echo "Instalando dependencias con Composer..."
   composer install --optimize-autoloader --no-dev
 fi
 
-# Generar la clave de la aplicación si no está configurada en .env
-if ! grep -q "APP_KEY=base64" .env; then
+if [ -z "$APP_KEY" ]; then
   echo "Generando clave de la aplicación..."
   php artisan key:generate
 fi
 
-# Limpiar caches: configuración, rutas y vistas
+# Procesar trabajos de cola en segundo plano
+php artisan queue:work --tries=1 &
+
+# Limpiar caches: configuración y rutas
 php artisan config:clear
 php artisan route:clear
-php artisan view:clear
+# php artisan view:clear  ← 🔴 Esto lo quitamos
 
 echo "⚙️ Ejecutando migraciones..."
 php artisan migrate --force
-
-# if [ "$RUN_SEED" = "true" ]; then
-#   echo "🌱 Ejecutando seeders..."
-#   php artisan db:seed --force
-# fi
-#
-
 
 echo "🚀 Iniciando Apache..."
 php artisan queue:work --tries=1 &
