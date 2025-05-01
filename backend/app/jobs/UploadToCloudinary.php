@@ -41,13 +41,23 @@ class UploadToCloudinary implements ShouldQueue
             return;
         }
 
+        // Verificar variables de entorno
+        if (
+            !env('CLOUDINARY_CLOUD_NAME') ||
+            !env('CLOUDINARY_API_KEY') ||
+            !env('CLOUDINARY_API_SECRET')
+        ) {
+            Log::error("Faltan variables de entorno de Cloudinary.");
+            return;
+        }
+
         try {
             // Configuración de Cloudinary
             Configuration::instance([
                 'cloud' => [
-                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME', 'default_cloud'),
-                    'api_key'    => env('CLOUDINARY_API_KEY', 'default_key'),
-                    'api_secret' => env('CLOUDINARY_API_SECRET', 'default_secret'),
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key'    => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
                 ],
                 'url' => ['secure' => true],
             ]);
@@ -65,7 +75,6 @@ class UploadToCloudinary implements ShouldQueue
             Storage::disk('public')->delete("{$this->folder}/{$this->filename}");
         } catch (Exception $e) {
             Log::error("Error al subir a Cloudinary: " . $e->getMessage());
-            // Puedes elegir reintentar el job automáticamente si lo deseas
             throw $e;
         }
     }
