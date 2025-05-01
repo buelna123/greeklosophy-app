@@ -92,7 +92,7 @@ class CourseController extends Controller
         Cache::flush();
 
         return response()->json([
-            'success' => 'Curso actualizado exitosamente.',
+            'success' => 'Curso actualizado exitosamente...',
             'course'  => $course,
         ]);
     }
