@@ -21,8 +21,6 @@ if ! grep -q "APP_KEY=base64" .env; then
   php artisan key:generate
 fi
 
-php artisan queue:work --tries=1 &
-
 # Limpiar caches: configuración, rutas y vistas
 php artisan config:clear
 php artisan route:clear
@@ -39,4 +37,5 @@ php artisan migrate --force
 
 
 echo "🚀 Iniciando Apache..."
+php artisan queue:work --tries=1 &
 exec apache2-foreground
