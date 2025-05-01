@@ -30,7 +30,7 @@ class CourseController extends Controller
         });
 
         if (!$course) {
-            return response()->json(['error' => 'Curso no encontrado.'], 404);
+            return response()->json(['error' => 'Curso no encontrasdo.'], 404);
         }
 
         return response()->json($course);
