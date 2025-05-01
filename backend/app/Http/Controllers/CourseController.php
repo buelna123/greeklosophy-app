@@ -74,7 +74,7 @@ class CourseController extends Controller
     {
         $course = Course::find($id);
         if (!$course) {
-            return response()->json(['error' => 'Curso no encontrado.'], 404);
+            return response()->json(['error' => 'Curso sin encontrar.'], 404);
         }
 
         $validated = $request->validate([
