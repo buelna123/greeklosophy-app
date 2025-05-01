@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; 
 
 class AppServiceProvider extends ServiceProvider
 {

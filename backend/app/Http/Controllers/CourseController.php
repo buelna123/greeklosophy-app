@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Jobs\UploadToCloudinary;
-use App\Helpers\FileHelper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -30,7 +28,7 @@ class CourseController extends Controller
         });
 
         if (!$course) {
-            return response()->json(['error' => 'Curso no encontrasdo.'], 404);
+            return response()->json(['error' => 'Curso no encontrado.'], 404);
         }
 
         return response()->json($course);
@@ -47,27 +45,8 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $filename = FileHelper::generateUniqueFilename($request->file('image'));
-            $localPath = FileHelper::getPublicStoragePath('courses', $filename);
-
-            Storage::disk('public')->put($localPath, file_get_contents($request->file('image')));
-            $validated['image'] = FileHelper::getPublicUrl('courses', $filename);
-
-            // Verificación: existe archivo local
-            if (!file_exists(storage_path("app/public/{$localPath}"))) {
-                return response()->json([
-                    'error' => "Archivo no encontrado localmente: $localPath"
-                ], 500);
-            }
-
-            // Intento de dispatch con captura de error
-            try {
-                UploadToCloudinary::dispatch('courses', $filename);
-            } catch (\Throwable $e) {
-                return response()->json([
-                    'error' => 'Error al despachar job: ' . $e->getMessage()
-                ], 500);
-            }
+            $path = $request->file('image')->store('courses', 'public');
+            $validated['image'] = '/api/public/courses/' . basename($path);
         }
 
         $course = Course::create($validated);
@@ -101,27 +80,10 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $filename = FileHelper::generateUniqueFilename($request->file('image'));
-            $localPath = FileHelper::getPublicStoragePath('courses', $filename);
-
-            Storage::disk('public')->put($localPath, file_get_contents($request->file('image')));
-            $validated['image'] = FileHelper::getPublicUrl('courses', $filename);
-
-            // Verificación: existe archivo local
-            if (!file_exists(storage_path("app/public/{$localPath}"))) {
-                return response()->json([
-                    'error' => "Archivo no encontrado localmente: $localPath"
-                ], 500);
-            }
-
-            // Intento de dispatch con captura de error
-            try {
-                UploadToCloudinary::dispatch('courses', $filename);
-            } catch (\Throwable $e) {
-                return response()->json([
-                    'error' => 'Error al despachar job: ' . $e->getMessage()
-                ], 500);
-            }
+            $path = $request->file('image')->store('courses', 'public');
+            $validated['image'] = '/api/public/courses/' . basename($path);
+        } else {
+            unset($validated['image']);
         }
 
         $course->update($validated);
@@ -150,3 +112,4 @@ class CourseController extends Controller
         return response()->json(['success' => 'Curso eliminado exitosamente.']);
     }
 }
+#

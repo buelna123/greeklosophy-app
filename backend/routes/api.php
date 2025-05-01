@@ -132,11 +132,3 @@ Route::get('/clear-config', function () {
     return 'Todo limpiado, supuestamente.';
 });
 
-
-Route::get('/cloudinary-test', function () {
-    return [
-        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
-        'api_key'    => env('CLOUDINARY_API_KEY'),
-        'api_secret' => env('CLOUDINARY_API_SECRET') ? 'OK' : null, // Evitamos mostrar el secreto
-    ];
-});
