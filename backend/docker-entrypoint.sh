@@ -33,7 +33,7 @@ php artisan migrate --force
 #   echo "🌱 Ejecutando seeders..."
 #   php artisan db:seed --force
 # fi
-
+#
 
 
 echo "🚀 Iniciando Apache..."
