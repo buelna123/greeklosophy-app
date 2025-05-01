@@ -6,7 +6,8 @@ use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Cloudinary\Configuration\Configuration;
+use Cloudinary\Uploader;
 
 class CourseController extends Controller
 {
@@ -46,10 +47,19 @@ class CourseController extends Controller
 
         if ($request->hasFile('image')) {
             try {
-                $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+                Configuration::instance([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key'    => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                    'url' => ['secure' => true]
+                ]);
+
+                $uploaded = Uploader::upload($request->file('image')->getRealPath(), [
                     'folder' => 'greeklosophy/courses'
                 ]);
-                $validated['image'] = $uploaded->getSecurePath();
+                $validated['image'] = $uploaded['secure_url'];
             } catch (\Exception $e) {
                 return response()->json(['error' => 'Error al subir imagen: ' . $e->getMessage()], 500);
             }
@@ -87,10 +97,19 @@ class CourseController extends Controller
 
         if ($request->hasFile('image')) {
             try {
-                $uploaded = Cloudinary::upload($request->file('image')->getRealPath(), [
+                Configuration::instance([
+                    'cloud' => [
+                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                        'api_key'    => env('CLOUDINARY_API_KEY'),
+                        'api_secret' => env('CLOUDINARY_API_SECRET'),
+                    ],
+                    'url' => ['secure' => true]
+                ]);
+
+                $uploaded = Uploader::upload($request->file('image')->getRealPath(), [
                     'folder' => 'greeklosophy/courses'
                 ]);
-                $validated['image'] = $uploaded->getSecurePath();
+                $validated['image'] = $uploaded['secure_url'];
             } catch (\Exception $e) {
                 return response()->json(['error' => 'Error al subir imagen: ' . $e->getMessage()], 500);
             }
