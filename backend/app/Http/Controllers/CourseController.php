@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Jobs\UploadToCloudinary;
+use App\Helpers\FileHelper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
-use Cloudinary\Configuration\Configuration;
-use Cloudinary\Uploader;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -47,19 +47,13 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            try {
-                Configuration::instance([
-                    'cloud' => Config::get('cloudinary.cloud'),
-                    'url'   => Config::get('cloudinary.url'),
-                ]);
+            $filename = FileHelper::generateUniqueFilename($request->file('image'));
+            $localPath = FileHelper::getPublicStoragePath('courses', $filename);
+            Storage::disk('public')->put($localPath, file_get_contents($request->file('image')));
+            $validated['image'] = FileHelper::getPublicUrl('courses', $filename);
 
-                $uploaded = Uploader::upload($request->file('image')->getRealPath(), [
-                    'folder' => 'greeklosophy/courses'
-                ]);
-                $validated['image'] = $uploaded['secure_url'];
-            } catch (\Exception $e) {
-                return response()->json(['error' => 'Error al subir imagen: ' . $e->getMessage()], 500);
-            }
+            // Subida a Cloudinary en segundo plano
+            UploadToCloudinary::dispatch('courses', $filename);
         }
 
         $course = Course::create($validated);
@@ -93,19 +87,13 @@ class CourseController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            try {
-                Configuration::instance([
-                    'cloud' => Config::get('cloudinary.cloud'),
-                    'url'   => Config::get('cloudinary.url'),
-                ]);
+            $filename = FileHelper::generateUniqueFilename($request->file('image'));
+            $localPath = FileHelper::getPublicStoragePath('courses', $filename);
+            Storage::disk('public')->put($localPath, file_get_contents($request->file('image')));
+            $validated['image'] = FileHelper::getPublicUrl('courses', $filename);
 
-                $uploaded = Uploader::upload($request->file('image')->getRealPath(), [
-                    'folder' => 'greeklosophy/courses'
-                ]);
-                $validated['image'] = $uploaded['secure_url'];
-            } catch (\Exception $e) {
-                return response()->json(['error' => 'Error al subir imagen: ' . $e->getMessage()], 500);
-            }
+            // Subida a Cloudinary en segundo plano
+            UploadToCloudinary::dispatch('courses', $filename);
         }
 
         $course->update($validated);
