@@ -131,3 +131,10 @@ Route::get('/clear-config', function () {
     \Illuminate\Support\Facades\Artisan::call('view:clear');
     return 'Todo limpiado, supuestamente.';
 });
+
+Route::get('/cloudinary-test', function () {
+    return [
+        'cloud_name' => config('filesystems.disks.cloudinary.cloud_name'),
+        'api_key' => config('filesystems.disks.cloudinary.api_key'),
+    ];
+});
