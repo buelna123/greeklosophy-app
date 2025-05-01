@@ -49,11 +49,25 @@ class CourseController extends Controller
         if ($request->hasFile('image')) {
             $filename = FileHelper::generateUniqueFilename($request->file('image'));
             $localPath = FileHelper::getPublicStoragePath('courses', $filename);
+
             Storage::disk('public')->put($localPath, file_get_contents($request->file('image')));
             $validated['image'] = FileHelper::getPublicUrl('courses', $filename);
 
-            // Subida a Cloudinary en segundo plano
-            UploadToCloudinary::dispatch('courses', $filename);
+            // Verificación: existe archivo local
+            if (!file_exists(storage_path("app/public/{$localPath}"))) {
+                return response()->json([
+                    'error' => "Archivo no encontrado localmente: $localPath"
+                ], 500);
+            }
+
+            // Intento de dispatch con captura de error
+            try {
+                UploadToCloudinary::dispatch('courses', $filename);
+            } catch (\Throwable $e) {
+                return response()->json([
+                    'error' => 'Error al despachar job: ' . $e->getMessage()
+                ], 500);
+            }
         }
 
         $course = Course::create($validated);
@@ -89,11 +103,25 @@ class CourseController extends Controller
         if ($request->hasFile('image')) {
             $filename = FileHelper::generateUniqueFilename($request->file('image'));
             $localPath = FileHelper::getPublicStoragePath('courses', $filename);
+
             Storage::disk('public')->put($localPath, file_get_contents($request->file('image')));
             $validated['image'] = FileHelper::getPublicUrl('courses', $filename);
 
-            // Subida a Cloudinary en segundo plano
-            UploadToCloudinary::dispatch('courses', $filename);
+            // Verificación: existe archivo local
+            if (!file_exists(storage_path("app/public/{$localPath}"))) {
+                return response()->json([
+                    'error' => "Archivo no encontrado localmente: $localPath"
+                ], 500);
+            }
+
+            // Intento de dispatch con captura de error
+            try {
+                UploadToCloudinary::dispatch('courses', $filename);
+            } catch (\Throwable $e) {
+                return response()->json([
+                    'error' => 'Error al despachar job: ' . $e->getMessage()
+                ], 500);
+            }
         }
 
         $course->update($validated);
