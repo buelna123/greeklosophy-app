@@ -39,5 +39,4 @@ php artisan migrate --force
 
 
 echo "🚀 Iniciando Apache..."
-php artisan queue:work --tries=1 &
 exec apache2-foreground
