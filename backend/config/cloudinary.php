@@ -9,5 +9,4 @@ return [
     'url' => [
         'secure' => true
     ],
-    'upload_preset' => null
 ];

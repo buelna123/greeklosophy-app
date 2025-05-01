@@ -6,6 +6,7 @@ use App\Models\Course;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use Cloudinary\Configuration\Configuration;
 use Cloudinary\Uploader;
 
@@ -48,12 +49,8 @@ class CourseController extends Controller
         if ($request->hasFile('image')) {
             try {
                 Configuration::instance([
-                    'cloud' => [
-                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
-                        'api_key'    => env('CLOUDINARY_API_KEY'),
-                        'api_secret' => env('CLOUDINARY_API_SECRET'),
-                    ],
-                    'url' => ['secure' => true]
+                    'cloud' => Config::get('cloudinary.cloud'),
+                    'url'   => Config::get('cloudinary.url'),
                 ]);
 
                 $uploaded = Uploader::upload($request->file('image')->getRealPath(), [
@@ -84,7 +81,7 @@ class CourseController extends Controller
     {
         $course = Course::find($id);
         if (!$course) {
-            return response()->json(['error' => 'Curso sin encontrar.'], 404);
+            return response()->json(['error' => 'Curso no encontrado.'], 404);
         }
 
         $validated = $request->validate([
@@ -98,12 +95,8 @@ class CourseController extends Controller
         if ($request->hasFile('image')) {
             try {
                 Configuration::instance([
-                    'cloud' => [
-                        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
-                        'api_key'    => env('CLOUDINARY_API_KEY'),
-                        'api_secret' => env('CLOUDINARY_API_SECRET'),
-                    ],
-                    'url' => ['secure' => true]
+                    'cloud' => Config::get('cloudinary.cloud'),
+                    'url'   => Config::get('cloudinary.url'),
                 ]);
 
                 $uploaded = Uploader::upload($request->file('image')->getRealPath(), [
