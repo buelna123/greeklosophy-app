@@ -29,6 +29,17 @@ use App\Http\Controllers\AssignmentReviewController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\EnrolledMiddleware;
 
+// ✅ Ruta para servir imágenes directamente desde storage/app/public
+Route::get('/public/{folder}/{filename}', function ($folder, $filename) {
+    $path = storage_path("app/public/$folder/$filename");
+
+    if (!File::exists($path)) {
+        return response()->json(['error' => 'Archivo no encontrado.'], 404);
+    }
+
+    $mimeType = File::mimeType($path);
+    return Response::make(File::get($path), 200)->header("Content-Type", $mimeType);
+});
 
 // Rutas públicas
 Route::get('/courses', [CourseController::class, 'index']);
@@ -129,6 +140,5 @@ Route::get('/clear-config', function () {
     \Illuminate\Support\Facades\Artisan::call('route:clear');
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
     \Illuminate\Support\Facades\Artisan::call('view:clear');
-    return 'Todo limpiado, supuestamente.';
+    return 'Todo limpiado';
 });
-
