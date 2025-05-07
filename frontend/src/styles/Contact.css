@@ -1,0 +1,421 @@
+/* ======================
+   BASE STYLES
+   ====================== */
+   .contact-page-container {
+    margin: 0 auto;
+    color: #333;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #e73939e5 10%, #f0a5a5 90%);
+    background-size: 200% 200%;
+    animation: gradientAnimation 15s ease infinite;
+    position: relative;
+  }
+  
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+  }
+  
+  /* ======================
+     HERO SECTION
+     ====================== */
+  .contact-hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem 0;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .contact-hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 0 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .hero-text-content {
+    text-align: left;
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .contact-hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: #333;
+    line-height: 1.2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+  
+  .contact-hero-title::after {
+    content: '';
+    display: block;
+    width: 170px;
+    height: 4px;
+    background: #333;
+    margin: 1.5rem 0 0;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  .contact-hero-title:hover::after {
+    width: 240px;
+  }
+  
+  .contact-hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    margin-bottom: 2.5rem;
+    color: #333;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  
+  /* ======================
+     CONTACT ICONS
+     ====================== */
+  .contact-hero-icons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .contact-icon-link {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    will-change: transform;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .contact-icon-link:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  }
+  
+  .contact-icon-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: currentColor;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .contact-icon-link:hover::before {
+    opacity: 0.15;
+  }
+  
+  .contact-linkedin {
+    color: #0077b5;
+  }
+  
+  .contact-email {
+    color: #d44638;
+  }
+  
+  .contact-github {
+    color: #333;
+  }
+  
+  .contact-cv {
+    color: #4CAF50;
+    width: auto;
+    padding: 0 25px;
+    border-radius: 35px;
+    gap: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+  
+  .contact-icon {
+    font-size: 1.6rem;
+    color: inherit;
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-icon-link:hover .contact-icon {
+    transform: scale(1.1);
+  }
+  
+  .contact-cv span {
+    margin-left: 8px;
+    color: inherit;
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-icon-link:hover .contact-cv span {
+    transform: translateX(2px);
+  }
+  
+  .contact-info-tooltip {
+    position: absolute;
+    bottom: -90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: max-content;
+    max-width: 250px;
+    font-size: 0.9rem;
+    z-index: 20;
+    text-align: center;
+    line-height: 1.6;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(-50%) translateY(10px);
+  }
+  
+  .contact-icon-link:hover .contact-info-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  .contact-info-tooltip p {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    color: #333;
+  }
+  
+  /* ======================
+     ILLUSTRATION
+     ====================== */
+  .hero-illustration-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    justify-self: center;
+    z-index: 1;
+  }
+  
+  @keyframes drawPath {
+    from {
+      stroke-dashoffset: 1000;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  .hero-illustration-container svg {
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+  }
+  
+  .hero-illustration-container svg path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawPath 3s ease-in-out forwards;
+    animation-delay: 0.5s;
+  }
+  
+  /* ======================
+     SCROLL PROMPTS
+     ====================== */
+  .scroll-prompt {
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(246, 246, 246, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    background: rgba(121, 121, 121, 0.363);
+    backdrop-filter: blur(5px);
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .scroll-prompt:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+  }
+  
+  .scroll-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .scroll-prompt:hover .scroll-arrow {
+    transform: translateY(3px);
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-5px);
+    }
+    60% {
+      transform: translateY(-3px);
+    }
+  }
+  
+  .scroll-prompt .scroll-arrow {
+    animation: bounce 2s infinite;
+  }
+  
+  /* ======================
+     RESPONSIVE STYLES
+     ====================== */
+  @media (max-width: 992px) {
+    .contact-hero-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    
+    .hero-text-content {
+      max-width: 100%;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .contact-hero-title::after {
+      margin: 1.5rem auto 0;
+    }
+    
+    .contact-hero-icons {
+      justify-content: center;
+    }
+    
+    .hero-illustration-container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  
+    .scroll-prompt {
+      right: 20px;
+      bottom: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .contact-hero-icons {
+      gap: 1rem;
+    }
+    
+    .contact-icon-link {
+      width: 55px;
+      height: 55px;
+    }
+    
+    .contact-cv {
+      width: 140px;
+      height: 50px;
+    }
+  
+    .contact-info-tooltip {
+      bottom: -100px;
+      font-size: 0.85rem;
+      padding: 12px 15px;
+    }
+    
+    .contact-hero-title {
+      font-size: clamp(2rem, 6vw, 3rem);
+    }
+    
+    .contact-hero-subtitle {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+    }
+    
+    .hero-illustration-container {
+      max-width: 350px;
+    }
+  
+    .scroll-prompt {
+      font-size: 0.85rem;
+      padding: 8px 16px;
+    }
+  
+    .scroll-arrow {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .contact-hero-section {
+      padding: 1rem 0;
+    }
+    
+    .contact-hero-icons {
+      gap: 0.8rem;
+    }
+    
+    .contact-icon-link {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .contact-icon {
+      font-size: 1.4rem;
+    }
+    
+    .contact-cv {
+      width: 120px;
+      height: 45px;
+      font-size: 0.9rem;
+    }
+    
+    .scroll-prompt {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      right: 15px;
+      bottom: 15px;
+    }
+    
+    .scroll-arrow {
+      font-size: 1rem;
+    }
+    
+    .hero-illustration-container {
+      max-width: 280px;
+    }
+  }
