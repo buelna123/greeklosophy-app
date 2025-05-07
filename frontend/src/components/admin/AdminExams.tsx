@@ -159,15 +159,15 @@ const AdminExams: React.FC = () => {
                         handleShowResponses(exam.course_id);
                       }}
                     >
-                      {hasResponses ? (
+                    {hasResponses ? (
                         <FaBell color="white" />
                       ) : (
-                        <FaBellSlash color="gray" />
-                      )}
+                        <FaBellSlash color="black" />
+                      )}    
                     </Button>
                   </OverlayTrigger>
                   <Button
-                    variant="outline-primary"
+                    variant="danger" className="admin-button"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleEdit(exam);

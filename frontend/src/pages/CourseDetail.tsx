@@ -60,7 +60,7 @@ const CourseDetail = () => {
         descriptionRef.current.innerHTML = text.slice(0, index);
         index++;
         if (index <= text.length) {
-          typingTimeout.current = window.setTimeout(type, 15);
+          typingTimeout.current = window.setTimeout(type, 0.1);
         }
       }
     };

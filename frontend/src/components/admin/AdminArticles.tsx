@@ -236,7 +236,7 @@ const AdminArticles: React.FC = () => {
                   <td>{article.created_at ? formatDate(article.created_at) : "N/A"}</td>
                   <td>{article.updated_at ? formatDate(article.updated_at) : "N/A"}</td>
                   <td>
-                    <Button className="admin-button me-2" onClick={() => handleShowModal(article)}>
+                  <Button variant="danger" className="admin-button" onClick={() => handleShowModal(article)}>
                       Editar
                     </Button>
                     <Button variant="danger" className="admin-button" onClick={() => handleDelete(article.id)}>

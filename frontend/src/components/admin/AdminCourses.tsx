@@ -235,15 +235,22 @@ const AdminCourses = () => {
                 <td>{course.created_at ? formatDate(course.created_at) : "N/A"}</td>
                 <td>{course.updated_at ? formatDate(course.updated_at) : "N/A"}</td>
                 <td>
-                  <Button className="admin-button me-2" onClick={() => handleShowModal(course)}>Editar</Button>
-                  <Button variant="danger" className="admin-button me-2" onClick={() => handleDelete(course.id)}>Eliminar</Button>
-                  <Button
-                    variant="outline-secondary"
-                    className="admin-button"
-                    onClick={() => navigate(`/admin/quizzes?course=${course.id}&title=${encodeURIComponent(course.title)}`)}
-                  >
-                    Ver Quizzes
-                  </Button>
+                <Button variant="danger" className="admin-button me-2" onClick={() => handleShowModal(course)}>
+                      Editar
+                    </Button>
+                    <Button variant="danger" className="admin-button me-2" onClick={() => handleDelete(course.id)}>
+                      Eliminar
+                    </Button>
+                    <Button
+                      variant="danger" className="admin-button me-2"
+                      onClick={() =>
+                        navigate(
+                          `/admin/quizzes?course=${course.id}&title=${encodeURIComponent(course.title)}`
+                        )
+                      }
+                    >
+                      Ver Quizzes
+                    </Button>
                 </td>
               </tr>
             ))}

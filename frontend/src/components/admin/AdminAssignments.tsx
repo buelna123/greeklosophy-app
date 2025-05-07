@@ -125,7 +125,7 @@ const AdminAssignments: React.FC = () => {
                 <td>{assignment.title}</td>
                 <td>{formatDate(assignment.due_date)}</td>
                 <td>
-                  <Button className="admin-button me-2" onClick={() => handleShowModal(assignment)}>
+                <Button variant="danger" className="admin-button" onClick={() => handleShowModal(assignment)}>
                     Editar
                   </Button>
                   <Button variant="danger" className="admin-button" onClick={() => handleDelete(assignment.id)}>

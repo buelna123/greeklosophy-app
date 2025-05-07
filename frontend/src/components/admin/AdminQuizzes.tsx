@@ -110,7 +110,7 @@ const AdminQuizzes: React.FC = () => {
             >
               <span className="fw-bold">Tema: {group.topic_title}</span>
               <Button
-                variant="outline-primary"
+                variant="danger" className="admin-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   handleEdit(group.topic_id);

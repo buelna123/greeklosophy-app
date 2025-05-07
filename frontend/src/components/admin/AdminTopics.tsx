@@ -116,15 +116,14 @@ const AdminTopics: React.FC = () => {
                   <td>{formatDate(topic.created_at)}</td>
                   <td>{formatDate(topic.updated_at)}</td>
                   <td>
-                    <Button
-                      className="admin-button me-2"
+                  <Button
+                      variant="danger" className="admin-button"
                       onClick={() => handleShowModal(topic)}
                     >
                       Editar
                     </Button>
                     <Button
-                      variant="danger"
-                      className="admin-button"
+                      variant="danger" className="admin-button"
                       onClick={() => handleDelete(topic.id)}
                     >
                       Eliminar

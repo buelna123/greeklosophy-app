@@ -79,11 +79,20 @@
 
 /* Descripción con altura mínima uniforme */
 .course-description {
-    flex-grow: 1; /* 🔥 Permite que las tarjetas crezcan a la misma altura */
-    min-height: 80px; /* 🔥 Ajusta este valor según la cantidad de texto esperada */
-    display: flex;
-    align-items: center; /* 🔥 Centra el texto dentro del espacio asignado */
-}
+    flex-grow: 1;
+    min-height: 80px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* 🔥 Número de líneas a mostrar */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4em;
+    max-height: calc(1.4em * 5); /* opcional: limita la altura para evitar crecer demasiado */
+    align-items: center;
+    text-align: justify;
+    margin: 7px;
+  }
+
 
 /* Asegurar que los botones estén alineados */
 .course-button {
