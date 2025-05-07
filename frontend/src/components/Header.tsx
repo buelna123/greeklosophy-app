@@ -53,9 +53,6 @@ export function Header() {
           </Nav>
           <SearchBar />
           <Nav className="ms-2">
-            <Nav.Link onClick={() => setShowNotifications(true)} className="icon-link">
-              <FaBell />
-            </Nav.Link>
             <Nav.Link onClick={() => setShowProfile(true)} className="icon-link">
               <FaUser />
             </Nav.Link>

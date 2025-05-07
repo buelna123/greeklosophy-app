@@ -30,6 +30,8 @@ import ExamComponent from "@/components/course/ExamComponent";
 import ProgressDisplay from "@/components/course/ProgressDisplay";
 import BadgeList from "@/components/course/BadgeList";
 
+import ContactPage from "@/pages/Contact"; // ✅ nuevo import
+
 const AppRoutes = () => {
   const { user, isAdmin } = useAuth();
   const { appReady } = useAppStatus();
@@ -73,6 +75,7 @@ const AppRoutes = () => {
           <Route path="*" element={<Navigate to="topics" replace />} />
         </Route>
 
+        <Route path="/contacto" element={<ContactPage />} /> {/* ✅ nueva ruta */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
