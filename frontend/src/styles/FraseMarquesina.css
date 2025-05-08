@@ -1,48 +1,69 @@
 .marquesina-container {
-    width: 100%;
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #ddd;
-    padding: 8px 0;
-    position: relative;
-    overflow: hidden;
-    z-index: 50;
-    cursor: pointer;
-  }
-  
-  .marquesina-track {
-    display: flex;
-    white-space: nowrap;
-  }
-  
+  width: 100%;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 50;
+  cursor: pointer;
+}
+
+.marquesina-track {
+  display: flex;
+  white-space: nowrap;
+}
+
+.marquesina-frase {
+  display: inline-block;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2c2c2c;
+  opacity: 0.95;
+  margin-right: 3rem;
+}
+
+.marquesina-container::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, transparent, #d32f2f 50%, transparent);
+}
+
+@media (max-width: 992px) {
   .marquesina-frase {
-    display: inline-block;
-    font-family: "Georgia", "Times New Roman", serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #2c2c2c;
-    opacity: 0.95;
-    margin-right: 3rem;
+    font-size: 0.90rem;
+    transform: translateY(-5px);
   }
-  
-  .marquesina-container::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background: linear-gradient(to right, transparent, #d32f2f 50%, transparent);
+  .marquesina-container {
+    padding: 1px 0;
   }
-  
-  @media (max-width: 768px) {
-    .marquesina-frase {
-      font-size: 0.95rem;
-    }
+}
+
+@media (max-width: 768px) {
+  .marquesina-frase {
+    font-size: 0.90rem;
+    transform: translateY(-14px);
   }
-  
-  @media (max-width: 480px) {
-    .marquesina-frase {
-      font-size: 0.85rem;
-    }
+  .marquesina-container {
+    padding: 1px 0;
+    height: 10px;
+    overflow: visible;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .marquesina-frase {
+    font-size: 0.85rem;
+    transform: translateY(-18px);
+  }
+  .marquesina-container {
+    padding: 1px 0;
+    height: 8px;
+  }
+}
+

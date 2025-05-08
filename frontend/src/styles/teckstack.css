@@ -15,7 +15,7 @@
   }
   
   .tech-stack-title {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2.5rem, 5vw, 3.2rem);
     font-weight: 700;
     margin-bottom: 20px;
     text-align: center;
@@ -48,7 +48,7 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     flex-wrap: wrap;
     width: 100%;
     max-width: 1000px;
@@ -143,7 +143,7 @@
     gap: 1.5rem;
     width: 100%;
     overflow: hidden;
-    padding: 1rem 0;
+    padding: 0.8rem 0;
     justify-content: center;
   }
   
@@ -211,7 +211,7 @@
   .tech-detail-panel {
     background: white;
     border-radius: 15px;
-    margin: -0.5px auto;
+    margin: -20px auto;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(211, 47, 47, 0.1);
     display: flex;
@@ -222,12 +222,12 @@
   }
   
   .tech-detail-content {
-    padding: 1.8rem;
+    padding: 1rem 1.5rem;
     flex: 1;
   }
   
   .tech-detail-pattern {
-    width: 30%;
+    width: 35%;
     background: 
       linear-gradient(135deg, rgba(211, 47, 47, 0.05) 25%, transparent 25%) -50px 0,
       linear-gradient(225deg, rgba(211, 47, 47, 0.05) 25%, transparent 25%) -50px 0,

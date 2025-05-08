@@ -1,0 +1,35 @@
+.progress-bar {
+    position: fixed;
+    top: var(--header-height, 80px);
+    left: 0;
+    height: var(--progress-height, 5px);
+    background: var(--progress-color, #d32f2f);
+    width: 0%;
+    z-index: 999;
+    transition: width 0.2s linear, top 0.3s ease; /* Añadida transición para top */
+  }
+  
+  /* Media Queries para responsive */
+  @media (max-width: 992px) {
+    .progress-bar {
+      /* Ajustes específicos para tablets */
+      height: 4px;
+      transform: translateY(-5px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .progress-bar {
+      /* Ajustes específicos para móviles grandes */
+      height: 4px;
+      transform: translateY(-10px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .progress-bar {
+      /* Ajustes específicos para móviles pequeños */
+      height: 3px;
+      transform: translateY(-14px);
+    }
+  }

@@ -7,7 +7,7 @@
     overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    background: linear-gradient(135deg, #e73939e5 10%, #f0a5a5 90%);
+    background: linear-gradient(135deg, #e73939e5 10%, #f8b7b7 90%);
     background-size: 200% 200%;
     animation: gradientAnimation 15s ease infinite;
     position: relative;
@@ -302,20 +302,78 @@
   }
   
   /* ======================
-     RESPONSIVE STYLES
+     PROJECT INFO CARD
      ====================== */
+  .contact-info {
+    color: #6a5acd;
+    position: relative;
+  }
+  
+  .project-info-card {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480px;
+    max-width: 90vw;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    z-index: 20;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #333;
+    text-align: left;
+  }
+  
+  .project-info-card p {
+    margin: 0 0 15px 0;
+  }
+  
+  .project-info-card p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .project-info-card::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.98) transparent transparent transparent;
+  }
+  
+  .project-info-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  
+  /* ======================
+     RESPONSIVE STYLES - UNIFICADOS
+     ====================== */
+  @media (max-width: 1200px) {
+    .contact-hero-content {
+      gap: 30px;
+    }
+  }
+  
   @media (max-width: 992px) {
     .contact-hero-content {
       grid-template-columns: 1fr;
       text-align: center;
-      padding-top: 80px;
-      padding-bottom: 80px;
+      padding-top: 60px;
+      padding-bottom: 60px;
     }
     
     .hero-text-content {
       max-width: 100%;
       text-align: center;
       margin-bottom: 2rem;
+      order: 1;
     }
     
     .contact-hero-title::after {
@@ -324,22 +382,35 @@
     
     .contact-hero-icons {
       justify-content: center;
+      margin-top: 1.5rem;
+      order: 2;
     }
     
     .hero-illustration-container {
       max-width: 400px;
-      margin: 0 auto;
+      margin: 0 auto 2rem;
+      order: 3;
     }
-  
+    
     .scroll-prompt {
       right: 20px;
       bottom: 20px;
     }
+    
+    .project-info-card {
+      width: 380px;
+    }
   }
   
   @media (max-width: 768px) {
+    .contact-hero-content {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    
     .contact-hero-icons {
       gap: 1rem;
+      margin-top: 1.5rem;
     }
     
     .contact-icon-link {
@@ -351,7 +422,7 @@
       width: 140px;
       height: 50px;
     }
-  
+    
     .contact-info-tooltip {
       bottom: -100px;
       font-size: 0.85rem;
@@ -364,36 +435,58 @@
     
     .contact-hero-subtitle {
       font-size: clamp(1rem, 3vw, 1.3rem);
+      margin-bottom: 1.5rem;
     }
     
     .hero-illustration-container {
       max-width: 350px;
     }
-  
+    
     .scroll-prompt {
       font-size: 0.85rem;
       padding: 8px 16px;
     }
-  
+    
     .scroll-arrow {
       font-size: 1.1rem;
     }
+    
+    .project-info-card {
+      width: 340px;
+      font-size: 0.9rem;
+      padding: 20px;
+    }
   }
   
-  @media (max-width: 480px) {
+  @media (max-width: 576px) {
     .contact-hero-section {
       padding: 1rem 0;
+      justify-content: flex-start;
+      min-height: auto;
+      height: auto;
+    }
+    
+    .contact-hero-content {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .hero-text-content {
+      margin-top: 20px;
     }
     
     .contact-hero-icons {
       gap: 0.8rem;
+      margin: 1.5rem 0;
     }
     
     .contact-icon-link {
       width: 50px;
       height: 50px;
     }
-  
+    
     .contact-icon {
       font-size: 1.4rem;
     }
@@ -417,5 +510,37 @@
     
     .hero-illustration-container {
       max-width: 280px;
+      margin: 1rem auto;
+    }
+    
+    .project-info-card {
+      width: calc(100vw - 40px);
+      padding: 16px;
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .contact-hero-icons {
+      gap: 0.6rem;
+    }
+    
+    .contact-icon-link {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .contact-icon {
+      font-size: 1.3rem;
+    }
+    
+    .contact-cv {
+      width: 110px;
+      height: 40px;
+      font-size: 0.8rem;
+    }
+    
+    .project-info-card {
+      padding: 14px;
     }
   }

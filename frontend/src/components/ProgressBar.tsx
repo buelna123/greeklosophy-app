@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
+import "@/styles/ProgressBar.css"; // Importamos el CSS
 
 interface ProgressBarProps {
   color?: string; // Color personalizado (opcional)
@@ -7,7 +8,7 @@ interface ProgressBarProps {
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ color = "#d32f2f", height = 5 }) => {
   const progressBarRef = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useState(80); // Valor inicial: 80px
+  const [headerHeight, setHeaderHeight] = useState(70); // Valor inicial: 80px
 
   // Actualizar la posición de la barra de progreso
   const updateProgressBarPosition = useCallback(() => {
@@ -54,16 +55,12 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ color = "#d32f2f", height = 5
   return (
     <div
       ref={progressBarRef}
+      className="progress-bar"
       style={{
-        position: "fixed",
-        top: `${headerHeight}px`, // Usa la altura dinámica del Header
-        left: 0,
-        height: `${height}px`,
-        background: color,
-        width: "0%",
-        zIndex: 999, // Menor que el z-index del Header
-        transition: "width 0.2s linear",
-      }}
+        '--progress-color': color,
+        '--progress-height': `${height}px`,
+        top: `${headerHeight}px`
+      } as React.CSSProperties}
     ></div>
   );
 };

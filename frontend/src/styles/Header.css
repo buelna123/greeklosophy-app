@@ -7,7 +7,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* Asegúrate de que sea menor que el z-index de la barra de progreso */
+  z-index: 1000;
   transition: all 0.3s ease;
 }
 
@@ -27,41 +27,183 @@
 }
 
 .logo {
-  height: 60px;
+  height: 50px;
   margin-right: 10px;
+  transition: transform 0.3s ease;
 }
 
-/* Enlaces de navegación */
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* Main Navigation */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .nav-link {
+  display: flex;
+  align-items: center;
   color: black !important;
   font-size: 1rem;
   font-weight: 500;
-  position: relative;
-  transition: color 0.3s ease-in-out;
+  padding: 10px 15px !important;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-.nav-link::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 2px;
-  background: #d91313;
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+.nav-icon {
+  margin-right: 8px;
+  font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.nav-link:hover .nav-icon {
+  transform: translateY(-2px);
+  color: #d91313;
+}
+
+.nav-text {
+  transition: color 0.3s ease;
 }
 
 .nav-link:hover {
+  background-color: #f8f9fa;
   color: #d91313 !important;
 }
 
-.nav-link:hover::after {
-  width: 100%;
-  left: 0;
+.nav-link:hover .nav-text {
+  color: #d91313;
 }
 
-/* Search Bar y Loading */
+/* Profile Icon */
+.profile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+.profile-icon:hover {
+  background-color: #e9ecef;
+  transform: scale(1.1);
+  color: #d91313 !important;
+}
+
+/* Mobile Styles */
+.mobile-icons {
+  display: none;
+  gap: 15px;
+}
+
+.desktop-profile {
+  display: flex;
+}
+
+.search-profile-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .main-nav {
+    margin-top: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  
+  .nav-link {
+    width: 100%;
+    padding: 12px 15px !important;
+    border-radius: 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .search-profile-container {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .desktop-profile {
+    display: none;
+  }
+  
+  .mobile-icons {
+    display: flex;
+  }
+  
+  .logo {
+    height: 45px;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    padding: 5px 15px;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  .brand-text {
+    font-size: 1.2rem;
+  }
+  
+  .nav-link {
+    font-size: 0.95rem;
+  }
+  
+  .nav-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-navbar {
+    padding: 5px 10px;
+  }
+  
+  .logo {
+    height: 36px;
+  }
+  
+  .brand-text {
+    font-size: 1.1rem;
+  }
+  
+  .mobile-icons {
+    gap: 10px;
+  }
+  
+  .profile-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mantenemos intactos todos los estilos del searchbar */
 .search-bar-container {
   position: relative;
   display: flex;
@@ -85,7 +227,6 @@
   outline: none;
 }
 
-/* Indicador de carga dentro del search bar */
 .search-loading {
   position: absolute;
   right: 10px;
@@ -93,7 +234,6 @@
   transform: translateY(-50%);
 }
 
-/* Resultados de búsqueda */
 .search-results {
   position: absolute;
   top: calc(100% + 5px);
@@ -111,11 +251,6 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 .search-results li {
   padding: 10px;
   font-size: 0.95rem;
@@ -127,50 +262,4 @@
 .search-results li.selected {
   background: #f0f0f0;
   color: black;
-}
-
-/* Iconos de navegación */
-.icon-link {
-  font-size: 1.2rem;
-  margin-left: 15px;
-  color: black !important;
-  transition: transform 0.2s ease-in-out;
-}
-
-.icon-link:hover {
-  transform: scale(1.2);
-  color: #d91313 !important;
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-  .search-input {
-    width: 180px;
-    font-size: 0.9rem;
-    padding: 8px 12px;
-  }
-  
-  .search-results li {
-    font-size: 0.85rem;
-    padding: 8px;
-  }
-  
-  .custom-navbar {
-    padding: 5px 10px;
-  }
-  
-  .brand {
-    font-size: 1.3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-input {
-    width: 150px;
-    font-size: 0.85rem;
-  }
-  
-  .brand {
-    font-size: 1.1rem;
-  }
 }

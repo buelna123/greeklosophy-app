@@ -67,6 +67,7 @@
     display: flex;
     flex-direction: column;
     border: 1px solid rgba(255,255,255,0.4);
+    cursor: pointer;
   }
   
   .contact-showcase-card:hover {
@@ -168,27 +169,137 @@
   
   /* Specific card styles */
   .contact-admin-card .card-content h3 {
-    color: #2575fc;
+    color: #333;
   }
   
   .contact-admin-card .card-content h3::after {
-    background: #2575fc;
+    background: #d32f2f;
   }
   
   .contact-admin-card:hover .card-content h3::after {
-    background: #1a5dc8;
+    background: #d32f2f;
   }
   
   .contact-student-card .card-content h3 {
-    color: #38ef7d;
+    color: #333;
   }
   
   .contact-student-card .card-content h3::after {
-    background: #38ef7d;
+    background: #d32f2f;
   }
   
   .contact-student-card:hover .card-content h3::after {
-    background: #2acd6a;
+    background: #d32f2f;
+  }
+  
+  /* ======================
+     EXPANDED CARD MODAL STYLES (OPCIÓN 1 - IMAGEN ARRIBA)
+     ====================== */
+  .expanded-card-overlay {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+  }
+  
+  .expanded-card-content {
+    max-width: 850px;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    max-height: 80vh;
+    text-align: justify;
+  }
+  
+  .close-expanded-card {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: 1rem !important;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    padding: 0px !important;
+  }
+  
+  .close-expanded-card:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  .expanded-card-image-container {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+  }
+  
+  .expanded-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #f8f8f8;
+  }
+  
+  .expanded-card-details {
+    padding: 40px;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  
+  .expanded-card-details h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    position: relative;
+  }
+  
+  .expanded-card-details h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #d32f2f;
+    margin-top: 12px;
+  }
+  
+  .expanded-card-description {
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+  }
+  
+  /* Specific expanded card styles */
+  .admin-expanded {
+    border-top: 5px solid #d32f2f;
+  }
+  
+  .student-expanded {
+    border-top: 5px solid #d32f2f;
   }
   
   /* ======================
@@ -209,6 +320,18 @@
     
     .card-content {
       padding: 25px;
+    }
+  
+    .expanded-card-content {
+      max-width: 90%;
+    }
+  
+    .expanded-card-image-container {
+      height: 250px;
+    }
+  
+    .expanded-card-details {
+      padding: 30px;
     }
   }
   
@@ -248,6 +371,14 @@
     .card-content p {
       font-size: 0.95rem;
     }
+  
+    .expanded-card-details h3 {
+      font-size: 1.8rem;
+    }
+  
+    .expanded-card-description {
+      font-size: 1rem;
+    }
   }
   
   @media (max-width: 480px) {
@@ -279,5 +410,30 @@
     .card-tech-tags span {
       font-size: 0.8rem;
       padding: 5px 12px;
+    }
+  
+    .expanded-card-content {
+      max-height: 85vh;
+      max-width: 95%;
+    }
+  
+    .expanded-card-image-container {
+      height: 200px;
+    }
+  
+    .expanded-card-details {
+      padding: 20px;
+    }
+  
+    .expanded-card-details h3 {
+      font-size: 1.5rem;
+    }
+  
+    .close-expanded-card {
+      top: 10px;
+      right: 10px;
+      width: 35px;
+      height: 35px;
+      font-size: 1rem;
     }
   }

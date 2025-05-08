@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaReact, FaGitAlt, FaDocker, FaNpm, FaBootstrap, FaChevronLeft, FaChevronRight, FaJava, FaNode, FaServer } from 'react-icons/fa';
-import { SiTypescript, SiVite, SiVercel, SiLaravel, SiMysql, SiRailway, SiNextdotjs, SiVuedotjs, SiPython, SiCplusplus, SiDotnet, SiJquery, SiPostman, SiTailwindcss,
-  SiRedux,
-  SiSass,
-  SiExpress,
-  SiCypress
+import { SiTypescript, SiVite, SiVercel, SiLaravel, SiMysql, SiRailway, SiNextdotjs, SiVuedotjs, SiPython, SiCplusplus, SiDotnet, SiJquery, SiPostman, SiTailwindcss, 
+  SiRedux, 
+  SiSass, 
+  SiExpress, 
+  SiCypress,
+  SiJira,
+  SiXml,
+  SiJson
 } from 'react-icons/si';
 import { TbBrandFramerMotion, TbBrandGatsby } from 'react-icons/tb';
-import { DiPhp } from 'react-icons/di';
+import { DiPhp, DiScrum } from 'react-icons/di';
 import useViewportSizes from '@/hooks/useViewportSizes';
 import "@/styles/teckstack.css";
 
@@ -27,7 +30,6 @@ type TechItem = {
   color: string;
   desc: string;
   since: string;
-  projects: number | string;
   featured: string[];
   category: 'frontend' | 'backend' | 'tools';
   related?: string[];
@@ -50,133 +52,109 @@ const TechStack = ({ onDetailPanelVisibilityChange }: TechStackProps) => {
       icon: <FaReact size={24} />, 
       name: "React", 
       color: "#61DAFB", 
-      desc: "Librería JavaScript para construir interfaces de usuario interactivas",
-      since: "2020", 
-      projects: 15,
-      featured: ["Plataforma Educativa", "Dashboard Administrativo"],
-      category: 'frontend',
-      related: ['TypeScript', 'Vite', 'Framer Motion']
+      desc: "Usado para construir interfaces dinámicas en plataformas educativas y dashboards administrativos con renderizado eficiente",
+      since: "2023",
+      featured: ["Plataformas Educativas", "Dashboard Administrativo", "Sistema de Cursos Online", "Portal Institucional", "Aplicaciones SPA"],
+      category: 'frontend'
     },
     { 
       icon: <SiTypescript size={24} />, 
       name: "TypeScript", 
       color: "#3178C6", 
-      desc: "Superset tipado de JavaScript que mejora la calidad del código",
-      since: "2021", 
-      projects: 10,
-      featured: ["Sistema de Cursos Online", "App de Gestión"],
-      category: 'frontend',
-      related: ['React', 'Vite']
+      desc: "Implementado para mejorar la calidad del código en proyectos complejos con tipado estático",
+      since: "2023",
+      featured: ["Sistema de Gestión", "App de Gestión", "Aplicaciones SPA", "Plataformas Educativas"],
+      category: 'frontend'
     },
     { 
       icon: <FaBootstrap size={24} />, 
       name: "Bootstrap", 
       color: "#7952B3", 
-      desc: "Framework CSS para desarrollo responsive y rápido",
-      since: "2019", 
-      projects: 8,
-      featured: ["Portal Institucional", "Landing Pages"],
-      category: 'frontend',
-      related: []
+      desc: "Utilizado para desarrollar interfaces responsive rápidamente en proyectos con plazos ajustados",
+      since: "2015",
+      featured: ["Landing Pages", "Portal Institucional", "Implementaciones ligeras con Vue", "Proyectos pequeños con React"],
+      category: 'frontend'
     },
     { 
       icon: <SiVite size={24} />, 
       name: "Vite", 
       color: "#646CFF", 
-      desc: "Herramienta de construcción frontend ultrarrápida",
-      since: "2022", 
-      projects: 7,
-      featured: ["Proyectos con React", "Aplicaciones SPA"],
-      category: 'frontend',
-      related: ['React', 'TypeScript']
+      desc: "Empleado como bundler ultrarrápido para optimizar tiempos de desarrollo en proyectos modernos",
+      since: "2023",
+      featured: ["Aplicaciones SPA", "Proyectos con React", "Landing Pages", "Sistema de Cursos Online"],
+      category: 'frontend'
     },
     { 
       icon: <TbBrandFramerMotion size={24} />, 
       name: "Framer Motion", 
       color: "#0055FF", 
-      desc: "Biblioteca de animaciones para React",
-      since: "2021", 
-      projects: 9,
-      featured: ["Microinteracciones", "Transiciones fluidas"],
-      category: 'frontend',
-      related: ['React']
+      desc: "Integrado para crear transiciones fluidas y microinteracciones en interfaces de usuario",
+      since: "2024",
+      featured: ["Dashboard Administrativo", "Plataformas Educativas", "Aplicaciones SPA", "eCommerce"],
+      category: 'frontend'
     },
     { 
       icon: <TbBrandGatsby size={24} />, 
       name: "GSAP", 
       color: "#88CE02", 
-      desc: "Motor de animaciones JavaScript de alto rendimiento",
-      since: "2020", 
-      projects: 6,
-      featured: ["Animaciones complejas", "Efectos scroll"],
-      category: 'frontend',
-      related: []
+      desc: "Usado para implementar animaciones complejas y efectos de scroll en proyectos destacados",
+      since: "2024",
+      featured: ["Landing Pages", "Portal Institucional", "eCommerce", "Proyectos pequeños con React"],
+      category: 'frontend'
     },
     { 
       icon: <SiNextdotjs size={24} />, 
       name: "Next.js", 
       color: "#000000", 
-      desc: "Framework de React para aplicaciones web estáticas y servidor",
-      since: "2021", 
-      projects: 8,
-      featured: ["SSR Applications", "Static Sites"],
-      category: 'frontend',
-      related: ['React']
+      desc: "Utilizado para proyectos que requieren renderizado del lado del servidor y mejor SEO",
+      since: "2023",
+      featured: ["Plataformas Educativas", "Portal Institucional", "eCommerce", "Sistema de Gestión"],
+      category: 'frontend'
     },
     { 
       icon: <SiVuedotjs size={24} />, 
       name: "Vue.js", 
       color: "#4FC08D", 
-      desc: "Framework progresivo de JavaScript para construir UIs",
-      since: "2020", 
-      projects: 7,
-      featured: ["Aplicaciones interactivas", "SPAs"],
-      category: 'frontend',
-      related: []
+      desc: "Implementado en proyectos que requieren desarrollo rápido con arquitectura componentizada",
+      since: "2023",
+      featured: ["Implementaciones ligeras con Vue", "App de Gestión", "Sistema de Cursos Online", "Landing Pages"],
+      category: 'frontend'
     },
     { 
       icon: <SiJquery size={24} />, 
       name: "jQuery", 
       color: "#0769AD", 
-      desc: "Biblioteca JavaScript para manipulación del DOM",
-      since: "2018", 
-      projects: 10,
-      featured: ["Sitios web tradicionales", "Animaciones"],
-      category: 'frontend',
-      related: []
+      desc: "Usado en proyectos legacy y para implementar funcionalidades básicas de forma rápida, como biblioteca de javascript",
+      since: "2023",
+      featured: ["Sitios web tradicionales", "Portal Institucional", "Landing Pages", "Proyectos pequeños con React"],
+      category: 'frontend'
     },
     { 
       icon: <SiTailwindcss size={24} />, 
       name: "Tailwind CSS", 
       color: "#06B6D4", 
-      desc: "Framework CSS utility-first para diseños personalizados rápidamente",
-      since: "2021", 
-      projects: 10,
-      featured: ["Aplicaciones modernas", "Prototipado rápido"],
-      category: 'frontend',
-      related: ['React', 'Vue.js']
+      desc: "Utilizado para crear diseños personalizados rápidamente sin salir del HTML",
+      since: "2023",
+      featured: ["Aplicaciones modernas", "Dashboard Administrativo", "Plataformas Educativas", "Landing Pages"],
+      category: 'frontend'
     },
     { 
       icon: <SiRedux size={24} />, 
       name: "Redux", 
       color: "#764ABC", 
-      desc: "Librería de gestión de estado predecible para aplicaciones JavaScript",
-      since: "2021", 
-      projects: 8,
-      featured: ["Aplicaciones complejas", "Gestión de estado global"],
-      category: 'frontend',
-      related: ['React']
+      desc: "Implementado para manejar estado global en aplicaciones complejas con múltiples componentes",
+      since: "2023",
+      featured: ["Sistema de Gestión", "Plataformas Educativas", "Dashboard Administrativo", "Aplicaciones SPA"],
+      category: 'frontend'
     },
     { 
       icon: <SiSass size={24} />, 
       name: "Sass/SCSS", 
       color: "#CC6699", 
-      desc: "Preprocesador CSS que añade características avanzadas",
-      since: "2020", 
-      projects: 12,
-      featured: ["Estilos mantenibles", "Sistemas de diseño"],
-      category: 'frontend',
-      related: []
+      desc: "Usado para escribir CSS más mantenible con variables, mixins y funciones avanzadas",
+      since: "2016",
+      featured: ["Sistemas de diseño", "Plataformas Educativas", "Portal Institucional", "eCommerce"],
+      category: 'frontend'
     },
     
     // Backend
@@ -184,122 +162,100 @@ const TechStack = ({ onDetailPanelVisibilityChange }: TechStackProps) => {
       icon: <SiLaravel size={24} />, 
       name: "Laravel", 
       color: "#FF2D20", 
-      desc: "Framework PHP elegante y expresivo para desarrollo web",
-      since: "2020", 
-      projects: 8,
-      featured: ["API REST", "Sistema de gestión"],
-      category: 'backend',
-      related: ['PHP', 'MySQL', 'Eloquent']
+      desc: "Framework principal para desarrollar APIs robustas y sistemas de gestión completos",
+      since: "2023",
+      featured: ["Plataformas Educativas", "Sistema de Gestión", "Dashboard Administrativo", "Sistema de Cursos Online"],
+      category: 'backend'
     },
     { 
       icon: <SiLaravel size={24} />, 
       name: "Laravel Eloquent", 
       color: "#FF2D20", 
-      desc: "ORM incluido en Laravel para trabajar con bases de datos",
-      since: "2020", 
-      projects: 8,
-      featured: ["Modelos de datos", "Relaciones complejas"],
-      category: 'backend',
-      related: ['Laravel', 'MySQL']
+      desc: "ORM utilizado para interactuar con bases de datos de forma intuitiva y productiva",
+      since: "2023",
+      featured: ["Modelos de datos complejos", "Plataformas Educativas", "Sistema de Gestión", "App de Gestión"],
+      category: 'backend'
     },
     { 
       icon: <DiPhp size={24} />, 
       name: "PHP", 
       color: "#777BB4", 
-      desc: "Lenguaje de scripting del lado del servidor",
-      since: "2019", 
-      projects: 10,
-      featured: ["Backends personalizados", "Integraciones"],
-      category: 'backend',
-      related: ['Laravel', 'MySQL']
+      desc: "Lenguaje backend para desarrollar lógica de negocio e integraciones personalizadas",
+      since: "2016",
+      featured: ["Backends personalizados", "Portal Institucional", "Sistema de Cursos Online", "Integraciones"],
+      category: 'backend'
     },
     { 
       icon: <SiMysql size={24} />, 
       name: "MySQL", 
       color: "#4479A1", 
-      desc: "Sistema de gestión de bases de datos relacionales",
-      since: "2020", 
-      projects: 12,
-      featured: ["Diseño de bases de datos", "Consultas optimizadas"],
-      category: 'backend',
-      related: ['PHP', 'Laravel']
+      desc: "Sistema de gestión de bases de datos relacional para almacenar información estructurada",
+      since: "2016",
+      featured: ["Plataformas Educativas", "Sistema de Gestión", "Dashboard Administrativo", "eCommerce"],
+      category: 'backend'
     },
     { 
       icon: <FaNode size={24} />, 
       name: "Node.js", 
       color: "#539E43", 
-      desc: "Entorno de ejecución para JavaScript del lado del servidor",
-      since: "2020", 
-      projects: 9,
-      featured: ["APIs escalables", "Aplicaciones en tiempo real"],
-      category: 'backend',
-      related: []
+      desc: "Entorno de ejecución para construir APIs escalables y aplicaciones en tiempo real",
+      since: "2023",
+      featured: ["APIs escalables", "App de Gestión", "Sistema de Cursos Online", "Aplicaciones SPA"],
+      category: 'backend'
     },
     { 
       icon: <SiExpress size={24} />, 
       name: "Express.js", 
       color: "#000000", 
-      desc: "Framework minimalista para Node.js para construir aplicaciones web y APIs",
-      since: "2021", 
-      projects: 7,
-      featured: ["APIs RESTful", "Aplicaciones web"],
-      category: 'backend',
-      related: ['Node.js']
+      desc: "Framework minimalista para crear APIs RESTful y aplicaciones web con Node.js",
+      since: "2023",
+      featured: ["APIs RESTful", "Sistema de Gestión", "App de Gestión", "Aplicaciones web"],
+      category: 'backend'
     },
     { 
       icon: <SiPython size={24} />, 
       name: "Python", 
       color: "#3776AB", 
-      desc: "Lenguaje de programación versátil y potente",
-      since: "2021", 
-      projects: 6,
-      featured: ["Scripting", "Automatización", "Backends"],
-      category: 'backend',
-      related: []
+      desc: "Utilizado para scripting, automatización y desarrollo de backends especializados",
+      since: "2016",
+      featured: ["Automatización", "Backends", "Scripting", "Sistema de Gestión"],
+      category: 'backend'
     },
     { 
       icon: <SiCplusplus size={24} />, 
       name: "C++", 
       color: "#00599C", 
-      desc: "Lenguaje de programación compilado de propósito general",
-      since: "2018", 
-      projects: 4,
-      featured: ["Aplicaciones de alto rendimiento", "Sistemas embebidos"],
-      category: 'backend',
-      related: []
+      desc: "Empleado en proyectos que requieren alto rendimiento y eficiencia computacional",
+      since: "2016",
+      featured: ["Aplicaciones de alto rendimiento", "Sistemas embebidos", "Procesamiento de datos"],
+      category: 'backend'
     },
     { 
       icon: <FaJava size={24} />, 
       name: "Java", 
       color: "#007396", 
-      desc: "Lenguaje de programación orientado a objetos",
-      since: "2019", 
-      projects: 7,
-      featured: ["Aplicaciones empresariales", "Android development"],
-      category: 'backend',
-      related: []
+      desc: "Usado para desarrollar aplicaciones empresariales robustas y mantenibles",
+      since: "2016",
+      featured: ["Aplicaciones empresariales", "Sistema de Gestión", "Backends complejos"],
+      category: 'backend'
     },
     { 
       icon: <SiDotnet size={24} />, 
       name: ".NET", 
       color: "#512BD4", 
-      desc: "Framework de desarrollo de software de Microsoft",
-      since: "2021", 
-      projects: 5,
-      featured: ["Aplicaciones Windows", "APIs empresariales"],
-      category: 'backend',
-      related: []
+      desc: "Framework para desarrollar aplicaciones Windows y APIs empresariales escalables",
+      since: "2023",
+      featured: ["APIs empresariales", "Aplicaciones Windows", "Sistema de Gestión"],
+      category: 'backend'
     },
     { 
       icon: <FaServer size={24} />, 
       name: "RESTful APIs", 
       color: "#FF6B6B", 
-      desc: "Arquitectura para diseño de servicios web",
-      since: "2020", 
-      projects: 12,
-      featured: ["Integraciones", "Microservicios"],
-      category: 'backend',
-      related: []
+      desc: "Arquitectura principal para diseñar servicios web escalables e integrables",
+      since: "2016",
+      featured: ["Plataformas Educativas", "Sistema de Gestión", "Dashboard Administrativo", "App de Gestión"],
+      category: 'backend'
     },
     
     // Tools
@@ -307,80 +263,102 @@ const TechStack = ({ onDetailPanelVisibilityChange }: TechStackProps) => {
       icon: <FaGitAlt size={24} />, 
       name: "Git", 
       color: "#F05032", 
-      desc: "Sistema de control de versiones distribuido",
-      since: "2019", 
-      projects: "Todos",
-      featured: ["Control de versiones", "Trabajo en equipo"],
-      category: 'tools',
-      related: []
+      desc: "Sistema de control de versiones utilizado en todos los proyectos para colaboración",
+      since: "2016",
+      featured: ["Control de versiones", "Trabajo en equipo", "Integración continua"],
+      category: 'tools'
     },
     { 
       icon: <FaDocker size={24} />, 
       name: "Docker", 
       color: "#2496ED", 
-      desc: "Plataforma para contenerizar aplicaciones",
-      since: "2021", 
-      projects: 6,
-      featured: ["Entornos aislados", "Deployment consistente"],
-      category: 'tools',
-      related: []
+      desc: "Usado para contenerizar aplicaciones y garantizar entornos de desarrollo consistentes",
+      since: "2023",
+      featured: ["Plataformas Educativas", "Sistema de Gestión", "APIs", "Microservicios"],
+      category: 'tools'
+    },
+    { 
+      icon: <DiScrum size={24} />, 
+      name: "Scrum", 
+      color: "#009FDA", 
+      desc: "Metodología ágil implementada para gestionar proyectos de desarrollo eficientemente",
+      since: "2023",
+      featured: ["Gestión de proyectos", "Planificación de sprints", "Desarrollo iterativo"],
+      category: 'tools'
+    },
+    { 
+      icon: <SiJira size={24} />, 
+      name: "Jira", 
+      color: "#0052CC", 
+      desc: "Herramienta principal para seguimiento de tareas y gestión ágil de proyectos",
+      since: "2023",
+      featured: ["Seguimiento de tareas", "Tableros Scrum", "Reportes de progreso"],
+      category: 'tools'
+    },
+    { 
+      icon: <SiJson size={24} />, 
+      name: "JSON", 
+      color: "#000000", 
+      desc: "Formato estándar para intercambio de datos entre frontend y backend",
+      since: "2016",
+      featured: ["APIs", "Configuraciones", "Almacenamiento estructurado"],
+      category: 'tools'
+    },
+    { 
+      icon: <SiXml size={24} />, 
+      name: "XML", 
+      color: "#005A9C", 
+      desc: "Utilizado para integraciones con sistemas legacy y servicios empresariales",
+      since: "2016",
+      featured: ["Integraciones empresariales", "SOAP APIs", "Sistemas legacy"],
+      category: 'tools'
     },
     { 
       icon: <FaNpm size={24} />, 
       name: "npm", 
       color: "#CB3837", 
-      desc: "Gestor de paquetes para Node.js",
-      since: "2019", 
-      projects: "Todos",
-      featured: ["Gestión de dependencias", "Scripts personalizados"],
-      category: 'tools',
-      related: []
+      desc: "Gestor de paquetes principal para instalar y administrar dependencias JavaScript",
+      since: "2023",
+      featured: ["Gestión de dependencias", "Scripts personalizados", "Paquetes reutilizables"],
+      category: 'tools'
     },
     { 
       icon: <SiPostman size={24} />, 
       name: "Postman", 
       color: "#FF6C37", 
-      desc: "Plataforma para desarrollo y testing de APIs",
-      since: "2020", 
-      projects: "Todos",
-      featured: ["Testing APIs", "Documentación", "Mock servers"],
-      category: 'tools',
-      related: []
+      desc: "Herramienta esencial para probar, documentar y mockear APIs RESTful",
+      since: "2016",
+      featured: ["Testing APIs", "Documentación", "Mock servers", "Integraciones"],
+      category: 'tools'
     },
     { 
       icon: <SiVercel size={24} />, 
       name: "Vercel", 
       color: "#000000", 
-      desc: "Plataforma para deploy y hosting de aplicaciones frontend",
-      since: "2021", 
-      projects: 12,
-      featured: ["Deploys instantáneos", "Proyectos cliente"],
-      category: 'tools',
-      related: ['React', 'Vite']
+      desc: "Plataforma preferida para deployar aplicaciones frontend con integración continua",
+      since: "2025",
+      featured: ["Plataformas Educativas", "Landing Pages", "Aplicaciones SPA", "Proyectos con React"],
+      category: 'tools'
     },
     { 
       icon: <SiRailway size={24} />, 
       name: "Railway", 
       color: "#0B0D0E", 
-      desc: "Plataforma para deploy de aplicaciones backend",
-      since: "2022", 
-      projects: 5,
-      featured: ["Deploy de APIs", "Entornos de prueba"],
-      category: 'tools',
-      related: ['Laravel']
+      desc: "Usado para deployar aplicaciones backend y APIs con configuración simplificada",
+      since: "2025",
+      featured: ["Deploy de APIs", "Plataformas Educativas", "Sistema de Gestión", "Entornos de prueba"],
+      category: 'tools'
     },
     { 
       icon: <SiCypress size={24} />, 
       name: "Cypress", 
       color: "#17202C", 
-      desc: "Herramienta de testing end-to-end para aplicaciones web",
-      since: "2021", 
-      projects: 8,
-      featured: ["Pruebas E2E", "Testing de componentes", "Integración continua"],
-      category: 'tools',
-      related: ['React', 'Vue.js']
+      desc: "Implementado para testing end-to-end y garantizar calidad en aplicaciones web",
+      since: "2023",
+      featured: ["Plataformas Educativas", "Dashboard Administrativo", "Aplicaciones SPA", "eCommerce"],
+      category: 'tools'
     }
-  ];
+];
 
   // Group by category
   const techCategories = {
@@ -481,7 +459,6 @@ const TechStack = ({ onDetailPanelVisibilityChange }: TechStackProps) => {
                     {React.cloneElement(tech.icon, { size: 36 })}
                   </div>
                   <div className="tech-card-meta">
-                    <span>{tech.projects} projects</span>
                     <span>Since {tech.since}</span>
                   </div>
                 </div>
@@ -527,7 +504,7 @@ const TechStack = ({ onDetailPanelVisibilityChange }: TechStackProps) => {
               </h3>
               <p className="tech-detail-desc">{activeTech.desc}</p>
               <div className="tech-detail-projects">
-                <h4>Featured Projects:</h4>
+                <h4>Usado en proyectos:</h4>
                 <ul>
                   {activeTech.featured.map((project, i) => (
                     <li key={i}>{project}</li>
