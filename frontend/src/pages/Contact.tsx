@@ -433,7 +433,7 @@ const ContactPage = () => {
               </motion.div>
               
               <motion.a 
-                href="https://drive.google.com/your-cv-link" 
+                href="https://drive.google.com/file/d/1r7cGj2VaAFyIjgIkOsjooxseVwLEj4Jo/view?usp=sharing" 
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
